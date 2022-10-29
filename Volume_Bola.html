@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Calculator Volume Bola</title>
+</head>
+<body>
+    <span align="center"><h1>Volume Bola</h1></span>
+    <h3>Masukan nilai</h3>
+
+    <p>jari-jari Bola : <input type="number" id="jari-jari"></p>
+    <h4> Rumus Volume Bola = 4/3*phi*r*r*r</h4>
+    <h4>phi= 22/7</h4>
+    <h5> Hasil </h5>
+    <p id="hasildisini"></p>    
+    
+    <p><button onclick="hitung()">Hitung</p>
+    
+        <script type="text/javascript">
+        
+        function hitung(){
+            var JariJari = document.getElementById("jari-jari").value;
+            var X = 4/3
+            var phi = 22/7
+
+            let hasil = eval(X)*eval(phi)*eval(JariJari)*eval(JariJari)*eval(JariJari);
+            document.getElementById("hasildisini").innerHTML= hasil;
+            
+        }
+
+    </script>
+
+</body>
+</html>
