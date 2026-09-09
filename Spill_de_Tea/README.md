@@ -19,7 +19,22 @@ open index.html
 npx http-server . -p 8080 -c-1
 ```
 
-Untuk deploy: unggah folder ini apa adanya (GitHub Pages, Netlify, Vercel, cPanel).
+## Deploy
+
+Ada `vercel.json` di root repo, jadi situsnya langsung tersaji di `/` tanpa perlu
+mengubah setting Root Directory:
+
+1. Vercel -> **Add New Project** -> import repo ini
+2. Framework Preset **Other**, Build Command dan Output Directory dikosongkan
+   (statis murni, tidak ada build step)
+3. Deploy
+
+Rewrite-nya dijalankan setelah pengecekan filesystem, jadi file yang memang ada
+di root repo tetap disajikan apa adanya dan tidak tertimpa oleh situs ini.
+
+Untuk host lain (GitHub Pages, Netlify, cPanel), cukup unggah isi folder
+`Spill_de_Tea/` apa adanya. Seluruh path asetnya relatif, jadi aman dipasang di
+root maupun di subfolder.
 
 ## Struktur
 
