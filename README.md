@@ -19,27 +19,25 @@ open index.html
 npx http-server . -p 8080 -c-1
 ```
 
+Situsnya statis murni — tidak ada build step, tidak ada dependency yang perlu
+di-install.
+
 ## Deploy
 
-Ada `vercel.json` di root repo, jadi situsnya langsung tersaji di `/` tanpa perlu
-mengubah setting Root Directory:
+`index.html` ada di root repo, jadi tidak perlu file konfigurasi apa pun:
 
-1. Vercel -> **Add New Project** -> import repo ini
-2. Framework Preset **Other**, Build Command dan Output Directory dikosongkan
-   (statis murni, tidak ada build step)
-3. Deploy
+- **Vercel / Netlify** — import repo ini, Framework Preset **Other**, Build
+  Command dan Output Directory dikosongkan, lalu Deploy.
+- **GitHub Pages** — Settings -> Pages, pilih branch-nya, folder `/ (root)`.
+- **Hosting biasa / cPanel** — unggah seluruh isi repo apa adanya.
 
-Rewrite-nya dijalankan setelah pengecekan filesystem, jadi file yang memang ada
-di root repo tetap disajikan apa adanya dan tidak tertimpa oleh situs ini.
-
-Untuk host lain (GitHub Pages, Netlify, cPanel), cukup unggah isi folder
-`Spill_de_Tea/` apa adanya. Seluruh path asetnya relatif, jadi aman dipasang di
-root maupun di subfolder.
+Seluruh path aset di halaman ini relatif, jadi situsnya aman dipasang di root
+domain maupun di dalam subfolder.
 
 ## Struktur
 
 ```
-Spill_de_Tea/
+.
 ├── index.html              # seluruh markup halaman
 ├── css/
 │   ├── fonts.css           # @font-face untuk font yang di-host sendiri

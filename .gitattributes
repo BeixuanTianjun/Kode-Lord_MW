@@ -5,4 +5,4 @@
 *.woff2 binary
 *.woff binary
 # Vendored library — exclude from language stats and diffs
-Spill_de_Tea/vendor/* linguist-vendored
+vendor/* linguist-vendored
