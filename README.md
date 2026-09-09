@@ -58,7 +58,8 @@ eksternal yang perlu di-load:
 - **Badan gelas** — `LatheGeometry` dari profil siluet, material kaca fisik
 - **Isi minuman** — `ShaderMaterial` custom dengan gradien vertikal
   (teh pekat → milk tea → lapisan susu di atas) plus fresnel di tepi
-- **Boba** — 20 bola yang mengambang pelan, terlihat samar menembus minuman
+- **Bean curd** — 16 potongan lembut dengan skala dan kemiringan acak,
+  mengambang pelan dan terlihat menembus minuman
 - **Label** — di-generate ke `<canvas>` lalu dibungkus ke silinder
 - **Tutup dome, straw, bayangan kontak, dan partikel** melayang di sekitarnya
 

@@ -285,100 +285,21 @@
     });
   })();
 
-  /* ══════════ 9. PRE-ORDER FORM ══════════════════════════ */
+  /* ══════════ 9. PRE-ORDER EMBED ═════════════════════════ */
   (function () {
-    var form = $('#poForm');
-    if (!form) return;
-    var qty = $('#fQty'), totalEl = $('#poTotal'), menu = $('#fMenu'), ev = $('#fEvent');
-    var receipt = $('#receipt'), rCode = $('#rCode'), rList = $('#rList'), again = $('#rAgain');
+    var frame = $('#jfFrame'), embed = $('#jfEmbed'), fallback = $('#jfFallback');
+    if (!frame || !embed || !fallback) return;
 
-    var rupiah = function (n) { return 'Rp' + n.toLocaleString('id-ID'); };
-
-    function price() {
-      var o = menu.options[menu.selectedIndex];
-      return (o && parseInt(o.dataset.price, 10)) || 13000;
-    }
-    function total() {
-      var n = clamp(parseInt(qty.value, 10) || 1, 1, 50);
-      var t = price() * n;
-      if (n >= 10) t -= price();          // 10 → gratis 1
-      else if (n >= 5) t -= 5000;         // 5  → hemat Rp5.000
-      totalEl.textContent = rupiah(t);
-      return t;
-    }
-
-    $$('.qty').forEach(function (b) {
-      b.addEventListener('click', function () {
-        qty.value = clamp((parseInt(qty.value, 10) || 1) + parseInt(b.dataset.step, 10), 1, 50);
-        total();
-      });
-    });
-    [qty, menu].forEach(function (el) {
-      el.addEventListener('change', total);
-      el.addEventListener('input', total);
-    });
-    [menu, ev].forEach(function (s) {
-      s.addEventListener('change', function () {
-        s.classList.toggle('filled', !!s.value);
-        s.closest('.field').classList.remove('err');
-      });
-    });
-    total();
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var bad = false;
-      [['#fNama', 1], ['#fWa', 1], ['#fEvent', 1], ['#fMenu', 1]].forEach(function (f) {
-        var el = $(f[0]), wrap = el.closest('.field');
-        var ok = el.value && el.value.trim().length >= (el.id === 'fWa' ? 8 : 1);
-        wrap.classList.toggle('err', !ok);
-        if (!ok) bad = true;
-      });
-      if (bad) {
-        form.animate(
-          [{ transform: 'translateX(0)' }, { transform: 'translateX(-7px)' },
-           { transform: 'translateX(7px)' }, { transform: 'translateX(0)' }],
-          { duration: 320, easing: 'ease-in-out' }
-        );
-        return;
-      }
-
-      var n = clamp(parseInt(qty.value, 10) || 1, 1, 50);
-      var t = total();
-      var code = 'SDT-' + String(Math.floor(1000 + Math.random() * 8999));
-
-      rCode.textContent = code;
-      rList.innerHTML = '';
-      [
-        ['Nama', $('#fNama').value.trim()],
-        ['WhatsApp', $('#fWa').value.trim()],
-        ['Event', ev.value],
-        ['Menu', menu.value.split(' — ')[0]],
-        ['Jumlah', n + ' botol'],
-        ['Catatan', $('#fNote').value.trim() || '—'],
-        ['Total', rupiah(t)]
-      ].forEach(function (row) {
-        var li = document.createElement('li');
-        var s = document.createElement('span'); s.textContent = row[0];
-        var b = document.createElement('b');    b.textContent = row[1];
-        li.appendChild(s); li.appendChild(b);
-        rList.appendChild(li);
-      });
-
-      form.hidden = true;
-      receipt.hidden = false;
-      receipt.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-    });
-
-    again.addEventListener('click', function () {
-      receipt.hidden = true;
-      form.hidden = false;
-      form.reset();
-      [menu, ev].forEach(function (s) { s.classList.remove('filled'); });
-      qty.value = 2;
-      total();
-      form.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-    });
+    /* Some hosts refuse third-party frames outright, and a blocked frame just
+       leaves a blank panel. If the embed hasn't reported back, swap in a
+       direct link so the form is still reachable. */
+    var loaded = false;
+    embed.addEventListener('load', function () { loaded = true; });
+    setTimeout(function () {
+      if (loaded) return;
+      frame.hidden = true;
+      fallback.hidden = false;
+    }, 3500);
   })();
 
   /* ══════════ 10. MISC ═══════════════════════════════════ */

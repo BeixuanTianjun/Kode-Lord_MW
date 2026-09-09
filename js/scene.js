@@ -1,7 +1,7 @@
 /* ============================================================
    SPILL DE TEA — 3D signature cup
    Procedurally built with three.js: glass tumbler, layered
-   milk-tea liquid (custom shader), boba, dome lid, straw,
+   milk-tea liquid (custom shader), bean curd, dome lid, straw,
    wrapped label, and drifting tea-dust particles.
    ============================================================ */
 (function () {
@@ -152,19 +152,27 @@
   surface.position.y = LEVEL;
   cup.add(surface);
 
-  /* ── boba pearls ──────────────────────────────────────── */
-  var bobaGeo = new THREE.SphereGeometry(0.135, 20, 16);
-  var bobaMat = new THREE.MeshStandardMaterial({ color: 0x2a1a10, roughness: 0.22, metalness: 0.1 });
-  var bobas = [];
-  for (var b = 0; b < 20; b++) {
-    var m = new THREE.Mesh(bobaGeo, bobaMat);
+  /* ── bean curd ────────────────────────────────────────────
+     Soft douhua chunks rather than round pearls: each one is a
+     squashed sphere at its own scale and tilt, so the cluster reads
+     as scooped curd settling at the bottom.                        */
+  var curdGeo = new THREE.SphereGeometry(0.17, 16, 12);
+  var curdMat = new THREE.MeshStandardMaterial({
+    color: 0xf4e7cf, roughness: 0.74, metalness: 0
+  });
+  var curds = [];
+  for (var b = 0; b < 16; b++) {
+    var m = new THREE.Mesh(curdGeo, curdMat);
     var ang = Math.random() * Math.PI * 2;
-    var rad = Math.sqrt(Math.random()) * 0.5;
-    m.position.set(Math.cos(ang) * rad, 0.16 + Math.random() * 0.42, Math.sin(ang) * rad);
+    var rad = Math.sqrt(Math.random()) * 0.47;
+    m.position.set(Math.cos(ang) * rad, 0.18 + Math.random() * 0.4, Math.sin(ang) * rad);
+    var s = 0.8 + Math.random() * 0.45;
+    m.scale.set(s, s * (0.54 + Math.random() * 0.22), s);
+    m.rotation.set(Math.random() * 0.6, Math.random() * Math.PI, Math.random() * 0.6);
     m.userData.p = Math.random() * Math.PI * 2;
     m.userData.y0 = m.position.y;
     cup.add(m);
-    bobas.push(m);
+    curds.push(m);
   }
 
   /* ── wrapped label ────────────────────────────────────── */
@@ -381,10 +389,10 @@
     surface.rotation.z = Math.sin(t * 1.25) * 0.05;
     surface.position.y = LEVEL + Math.sin(t * 1.8) * 0.014;
 
-    for (var i = 0; i < bobas.length; i++) {
-      var m = bobas[i];
-      m.position.y = m.userData.y0 + Math.sin(t * 1.3 + m.userData.p) * 0.055;
-      m.rotation.y += 0.006;
+    for (var i = 0; i < curds.length; i++) {
+      var m = curds[i];
+      m.position.y = m.userData.y0 + Math.sin(t * 1.3 + m.userData.p) * 0.05;
+      m.rotation.y += 0.0022;
     }
 
     straw.rotation.z = -0.2 + Math.sin(t * 0.9) * 0.012;

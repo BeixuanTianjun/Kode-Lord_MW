@@ -328,8 +328,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 @keyframes wv{to{transform:rotate(360deg)}}
 .foam{position:absolute;left:0;right:0;top:0;height:16px;background:rgba(255,255,255,.55);
   filter:blur(3px)}
-.boba{position:absolute;bottom:6px;width:15px;height:15px;border-radius:50%;
-  background:radial-gradient(circle at 32% 30%,#6b4a33,var(--c3));
+.curd{position:absolute;bottom:6px;width:18px;height:13px;
+  border-radius:46% 42% 44% 48%;
+  background:linear-gradient(150deg,#FCF5E7 0%,#F0E2C6 55%,#DFCCA6 100%);
+  box-shadow:inset 0 -2px 3px rgba(120,95,58,.2),0 1px 2px rgba(0,0,0,.14);
   animation:bob 3.4s ease-in-out infinite}
 .b1{left:16%}.b2{left:34%;bottom:18px;animation-delay:.4s}
 .b3{left:52%;animation-delay:.9s}.b4{left:70%;bottom:16px;animation-delay:1.3s}
@@ -462,65 +464,19 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pullquote cite{display:block;margin-top:22px;font-family:var(--ff-b);font-style:normal;
   font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 
-/* ══════════════ FORM ══════════════ */
-.form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{position:relative}
-.field--full{grid-column:1/-1}
-.field input,.field select,.field textarea{
-  width:100%;padding:22px 18px 9px;border:1px solid rgba(11,59,46,.2);border-radius:12px;
-  background:rgba(255,255,255,.72);font-size:15px;outline:none;
-  transition:border-color .35s,box-shadow .35s,background .35s;resize:none}
-.field textarea{padding-top:26px}
-.field select{appearance:none;cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230B3B2E' stroke-width='1.6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 18px center}
-.field input:focus,.field select:focus,.field textarea:focus{
-  border-color:var(--jade);background:#fff;box-shadow:0 0 0 4px rgba(11,59,46,.09)}
-.field label{position:absolute;left:19px;top:16px;font-size:14px;color:rgba(7,22,15,.5);
-  pointer-events:none;transform-origin:left top;
-  transition:transform .3s var(--ease),color .3s}
-.field input:focus + label,.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label,
-.field select:focus + label,.field select.filled + label{
-  transform:translateY(-9px) scale(.76);color:var(--jade)}
-.field label.static{transform:translateY(-9px) scale(.76);color:var(--jade)}
-.field.err input,.field.err select{border-color:#B4462F;box-shadow:0 0 0 4px rgba(180,70,47,.12)}
-.field--qty{grid-column:1/-1;display:flex;align-items:center;gap:8px;padding:19px 12px 8px;
-  border:1px solid rgba(11,59,46,.2);border-radius:12px;background:rgba(255,255,255,.72)}
-.field--qty input{border:0;background:none;text-align:center;padding:0;font-weight:700;
-  -moz-appearance:textfield}
-.field--qty input::-webkit-outer-spin-button,.field--qty input::-webkit-inner-spin-button{
-  -webkit-appearance:none;margin:0}
-.field--qty label{left:19px}
-.qty{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid rgba(11,59,46,.2);
-  background:#fff;cursor:pointer;font-size:17px;line-height:1;
-  transition:background .3s,color .3s,transform .3s var(--ease)}
-.qty:hover{background:var(--jade);color:var(--cream);transform:scale(1.08)}
-.form__total{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
-  padding:18px 20px;border-radius:12px;background:rgba(11,59,46,.06);margin-top:4px}
-.form__total span{font-size:13px;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
-.form__total b{font-family:var(--ff-d);font-size:31px;color:var(--jade)}
-.form button[type=submit]{grid-column:1/-1;margin-top:6px}
-.form__fine{grid-column:1/-1;font-size:11.5px;opacity:.5;line-height:1.6;text-align:center}
-
-.receipt{text-align:center;padding:46px 32px;border-radius:var(--r);background:#fff;
-  box-shadow:0 26px 60px rgba(11,59,46,.16);animation:pop .7s var(--ease-out)}
-@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
-.receipt__check{width:74px;margin:0 auto 22px}
-.receipt__check svg{fill:none;stroke:var(--jade);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.receipt__check circle{stroke-dasharray:145;stroke-dashoffset:145;animation:draw2 .8s var(--ease-out) forwards}
-.receipt__check path{stroke:var(--gold);stroke-width:4;stroke-dasharray:40;stroke-dashoffset:40;
-  animation:draw2 .5s .5s var(--ease-out) forwards}
-@keyframes draw2{to{stroke-dashoffset:0}}
-.receipt h3{font-family:var(--ff-d);font-size:37px;margin-bottom:8px}
-.receipt__sub{font-size:14.5px;opacity:.65;margin-bottom:22px}
-.receipt__code{display:inline-block;padding:13px 28px;border-radius:999px;margin-bottom:26px;
-  background:var(--jade);color:var(--gold);font-weight:700;letter-spacing:.22em;font-size:16px}
-.receipt__list{text-align:left;max-width:380px;margin:0 auto 28px}
-.receipt__list li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14.5px;
-  border-bottom:1px dashed rgba(11,59,46,.14)}
-.receipt__list li span{opacity:.6}
-.receipt__list li b{text-align:right}
+/* ══════════════ FORM (Jotform embed) ══════════════ */
+.jf{display:flex;flex-direction:column;gap:14px}
+.jf__frame{border-radius:var(--r);overflow:hidden;background:#fff;
+  box-shadow:0 22px 50px rgba(11,59,46,.16),inset 0 0 0 1px rgba(11,59,46,.1)}
+.jf__frame iframe{display:block;width:100%;height:840px;border:0}
+.jf__fallback{padding:46px 32px;border-radius:var(--r);background:#fff;text-align:center;
+  box-shadow:0 22px 50px rgba(11,59,46,.16)}
+.jf__fallback h3{font-family:var(--ff-d);font-size:34px;margin-bottom:10px}
+.jf__fallback p{font-size:15px;line-height:1.7;opacity:.7;max-width:44ch;margin:0 auto 24px}
+.jf__note{font-size:12.5px;text-align:center;opacity:.6}
+.jf__note a{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.jf__note a:hover{color:var(--tea)}
+@media (max-width:640px){.jf__frame iframe{height:960px}}
 
 /* ══════════════ FOOTER ══════════════ */
 .footer{position:relative;z-index:2;background:var(--ink);color:var(--cream);
