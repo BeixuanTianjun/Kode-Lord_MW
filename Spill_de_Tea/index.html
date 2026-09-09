@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spill de Tea — Premium Taste, Student Price</title>
+<meta name="description" content="Spill de Tea — milk tea premium harga mahasiswa. Pre-order botolan untuk event kampus: tanpa antre, selalu fresh, mulai Rp13.000." />
+<meta name="theme-color" content="#0B3B2E" />
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/manrope-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/fonts.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B3B2E'/%3E%3Cpath d='M50 22c14 8 20 20 20 31a20 20 0 1 1-40 0c0-11 6-23 20-31z' fill='%23C8A24A'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+<!-- ═══════════ LOADER ═══════════ -->
+<div class="loader" id="loader">
+  <div class="loader__inner">
+    <div class="loader__mark">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="lo-ring" cx="60" cy="60" r="52" />
+        <path class="lo-leaf" d="M60 26c17 10 25 24 25 38a25 25 0 0 1-50 0c0-14 8-28 25-38z" />
+        <path class="lo-vein" d="M60 34v54" />
+      </svg>
+    </div>
+    <div class="loader__word"><span>S</span><span>P</span><span>I</span><span>L</span><span>L</span><span class="sp"></span><span>D</span><span>E</span><span class="sp"></span><span>T</span><span>E</span><span>A</span></div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+    <div class="loader__pct"><span id="loaderPct">0</span>%</div>
+  </div>
+</div>
+
+<!-- ═══════════ CURSOR ═══════════ -->
+<div class="cursor" id="cursor"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+
+<!-- ═══════════ BACKDROP (below the 3D stage) ═══════════ -->
+<div class="backdrop" aria-hidden="true">
+  <div class="backdrop__glow"></div>
+  <div class="backdrop__grain"></div>
+</div>
+
+<!-- ═══════════ 3D CANVAS ═══════════ -->
+<div class="stage" id="stage">
+  <canvas id="cupCanvas"></canvas>
+  <div class="stage__fallback" id="stageFallback" aria-hidden="true"></div>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<header class="nav" id="nav">
+  <a href="#hero" class="nav__brand" data-magnet>
+    <svg class="nav__logo" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="lg-ring" cx="60" cy="60" r="53" />
+      <path class="lg-leaf" d="M60 27c16 10 24 23 24 36a24 24 0 0 1-48 0c0-13 8-26 24-36z" />
+      <path class="lg-vein" d="M60 35v50M60 55l11-9M60 68l-11-9" />
+    </svg>
+    <span class="nav__name">Spill<em>de</em>Tea</span>
+  </a>
+  <nav class="nav__links" id="navLinks">
+    <a href="#filosofi" data-link>Cerita</a>
+    <a href="#menu" data-link>Menu</a>
+    <a href="#cara" data-link>Cara Order</a>
+    <a href="#harga" data-link>Harga</a>
+    <a href="#sistem" data-link>Sistem</a>
+  </nav>
+  <div class="nav__right">
+    <a href="#preorder" class="btn btn--gold btn--sm" data-magnet><span>Pre-Order</span></a>
+    <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <div class="hero__inner">
+    <p class="hero__eyebrow" data-reveal>
+      <span class="dot"></span> Venture Creation Project · Binus University
+    </p>
+
+    <h1 class="hero__title">
+      <span class="line"><span data-split>Spill</span></span>
+      <span class="line"><em data-split>de&nbsp;Tea</em></span>
+    </h1>
+
+    <p class="hero__tag" data-reveal data-delay="200">
+      Premium taste. <b>Student price.</b>
+    </p>
+
+    <p class="hero__lead" data-reveal data-delay="300">
+      Milk tea kekinian yang diseduh fresh per batch dan dikemas botolan.
+      Pre-order sebelum event kampus, ambil di jalur khusus — tanpa antre,
+      tanpa bikin dompet nangis.
+    </p>
+
+    <div class="hero__cta" data-reveal data-delay="400">
+      <a href="#preorder" class="btn btn--gold" data-magnet><span>Pre-Order Sekarang</span><i class="btn__arrow">→</i></a>
+      <a href="#menu" class="btn btn--ghost" data-magnet><span>Lihat Menu</span></a>
+    </div>
+
+    <div class="hero__stats" data-reveal data-delay="550">
+      <div class="stat"><b><span data-count="13" data-prefix="Rp" data-suffix=".000"></span></b><small>Harga per botol</small></div>
+      <div class="stat"><b><span data-count="68" data-suffix="%"></span></b><small>Margin kotor</small></div>
+      <div class="stat"><b><span data-count="0"></span> <small class="inline">menit</small></b><small>Waktu antre</small></div>
+      <div class="stat"><b><span data-count="500" data-suffix="+"></span></b><small>Botol batch pilot</small></div>
+    </div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <i></i>
+  </div>
+</section>
+
+<!-- ═══════════ MARQUEE ═══════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Premium Taste</span><i>✦</i><span>Student Price</span><i>✦</i><span>Fresh Batch</span><i>✦</i>
+    <span>Zero Antre</span><i>✦</i><span>Gula Aren Asli</span><i>✦</i><span>Spill de Tea</span><i>✦</i>
+    <span>Premium Taste</span><i>✦</i><span>Student Price</span><i>✦</i><span>Fresh Batch</span><i>✦</i>
+    <span>Zero Antre</span><i>✦</i><span>Gula Aren Asli</span><i>✦</i><span>Spill de Tea</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ═══════════ FILOSOFI ═══════════ -->
+<section class="sec sec--cream" id="filosofi">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sechead__num" data-reveal>01</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">
+        Teh yang <em>jujur.</em><br />Bukan cuma manis di depan.
+      </h2>
+      <p class="sechead__lead" data-reveal data-delay="200">
+        Kami mulai dari satu keresahan sederhana: minuman kekinian itu enak, tapi ribet dan mahal.
+        Jadi kami rombak ulang caranya — dari cara order, cara produksi, sampai cara ambilnya.
+      </p>
+    </div>
+
+    <div class="pillars">
+      <article class="pillar" data-reveal data-delay="0">
+        <div class="pillar__ico">
+          <svg viewBox="0 0 48 48"><path d="M24 6c10 6 15 15 15 23a15 15 0 0 1-30 0c0-8 5-17 15-23z"/><path d="M24 12v28M24 24l8-6M24 32l-8-6"/></svg>
+        </div>
+        <h3>Daun teh premium</h3>
+        <p>Teh hitam &amp; melati kualitas grosir premium, diseduh pekat supaya rasanya nggak hilang ditelan susu.</p>
+        <span class="pillar__idx">01</span>
+      </article>
+      <article class="pillar" data-reveal data-delay="120">
+        <div class="pillar__ico">
+          <svg viewBox="0 0 48 48"><path d="M14 10h20l-2 28a6 6 0 0 1-6 5h-4a6 6 0 0 1-6-5z"/><path d="M12 20h24"/><circle cx="21" cy="33" r="2.2"/><circle cx="28" cy="35" r="2.2"/></svg>
+        </div>
+        <h3>Gula aren asli</h3>
+        <p>Bukan sirup instan. Gula aren cair bikin karamelnya dalam, aromanya khas, dan aftertaste-nya bersih.</p>
+        <span class="pillar__idx">02</span>
+      </article>
+      <article class="pillar" data-reveal data-delay="240">
+        <div class="pillar__ico">
+          <svg viewBox="0 0 48 48"><rect x="15" y="7" width="18" height="34" rx="6"/><path d="M15 18h18"/><path d="M20 7V4h8v3"/></svg>
+        </div>
+        <h3>Botol siap konten</h3>
+        <p>Botol custom label, gampang dibawa keliling venue, dan jelas jauh lebih cakep buat feed kamu.</p>
+        <span class="pillar__idx">03</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ VS ═══════════ -->
+<section class="sec sec--dark vs" id="beda">
+  <div class="wrap">
+    <div class="sechead sechead--center">
+      <span class="sechead__num" data-reveal>02</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">Kenapa <em>beda</em></h2>
+      <p class="sechead__lead" data-reveal data-delay="200">Bandingkan sendiri dengan booth minuman kekinian yang biasa kamu antre.</p>
+    </div>
+
+    <div class="vs__grid">
+      <div class="vs__col vs__col--old" data-reveal>
+        <h3 class="vs__label">Booth Biasa</h3>
+        <ul>
+          <li><i>✕</i> Antre 15–30 menit pas jam istirahat</li>
+          <li><i>✕</i> Rp25.000 – Rp38.000 per cup</li>
+          <li><i>✕</i> Es cepat mencair, rasa berubah</li>
+          <li><i>✕</i> Produksi tebak-tebakan, banyak terbuang</li>
+          <li><i>✕</i> Cup polos, seadanya</li>
+        </ul>
+      </div>
+      <div class="vs__mid" aria-hidden="true"><span>VS</span></div>
+      <div class="vs__col vs__col--new" data-reveal data-delay="150">
+        <h3 class="vs__label">Spill de Tea</h3>
+        <ul>
+          <li><i>✓</i> Pre-order pickup, jalur terpisah</li>
+          <li><i>✓</i> Rp12.000 – Rp15.000 per botol</li>
+          <li><i>✓</i> Diproduksi H-1, chilled sampai pickup</li>
+          <li><i>✓</i> Batch sesuai order pasti — zero waste</li>
+          <li><i>✓</i> Botol custom label, Instagrammable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MENU ═══════════ -->
+<section class="sec sec--cream" id="menu">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sechead__num" data-reveal>03</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">Signature <em>Series</em></h2>
+      <p class="sechead__lead" data-reveal data-delay="200">Empat racikan inti. Semua 250ml, botolan, fresh batch.</p>
+    </div>
+
+    <div class="menu__grid">
+
+      <article class="card" data-reveal data-delay="0" style="--c1:#B3763F;--c2:#E8CBA6;--c3:#3A2416">
+        <div class="card__glass">
+          <div class="cup">
+            <div class="cup__lid"></div>
+            <div class="cup__body">
+              <div class="cup__liquid">
+                <span class="wave"></span>
+                <span class="foam"></span>
+                <em class="boba b1"></em><em class="boba b2"></em><em class="boba b3"></em>
+                <em class="boba b4"></em><em class="boba b5"></em>
+              </div>
+              <div class="cup__shine"></div>
+              <div class="cup__band">SPILL DE TEA</div>
+            </div>
+            <div class="cup__straw"></div>
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Best Seller</span>
+          <h3>Aren Milk Tea</h3>
+          <p>Teh hitam pekat, susu creamy, gula aren asli. Karamelnya nempel, manisnya nggak nabrak.</p>
+          <div class="card__foot"><b>Rp13.000</b><span>250 ml</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="120" style="--c1:#C9A24A;--c2:#F3E7C9;--c3:#3A2F14">
+        <div class="card__glass">
+          <div class="cup">
+            <div class="cup__lid"></div>
+            <div class="cup__body">
+              <div class="cup__liquid">
+                <span class="wave"></span><span class="foam"></span>
+                <em class="boba b1"></em><em class="boba b2"></em><em class="boba b3"></em>
+                <em class="boba b4"></em><em class="boba b5"></em>
+              </div>
+              <div class="cup__shine"></div>
+              <div class="cup__band">SPILL DE TEA</div>
+            </div>
+            <div class="cup__straw"></div>
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Signature</span>
+          <h3>Jasmine Boba Latte</h3>
+          <p>Teh melati wangi ketemu susu lembut, ditutup boba kenyal yang direbus tiap batch.</p>
+          <div class="card__foot"><b>Rp15.000</b><span>250 ml</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="240" style="--c1:#4E7A3A;--c2:#CFE3B4;--c3:#1E3315">
+        <div class="card__glass">
+          <div class="cup">
+            <div class="cup__lid"></div>
+            <div class="cup__body">
+              <div class="cup__liquid">
+                <span class="wave"></span><span class="foam"></span>
+                <em class="boba b1"></em><em class="boba b2"></em><em class="boba b3"></em>
+              </div>
+              <div class="cup__shine"></div>
+              <div class="cup__band">SPILL DE TEA</div>
+            </div>
+            <div class="cup__straw"></div>
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Baru</span>
+          <h3>Matcha Cloud</h3>
+          <p>Matcha grade upacara diseduh dingin, dilapis cream cloud asin-manis di atasnya.</p>
+          <div class="card__foot"><b>Rp15.000</b><span>250 ml</span></div>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="360" style="--c1:#D2762F;--c2:#F6D3A8;--c3:#4A2410">
+        <div class="card__glass">
+          <div class="cup">
+            <div class="cup__lid"></div>
+            <div class="cup__body">
+              <div class="cup__liquid">
+                <span class="wave"></span><span class="foam"></span>
+                <em class="boba b1"></em><em class="boba b2"></em>
+              </div>
+              <div class="cup__shine"></div>
+              <div class="cup__band">SPILL DE TEA</div>
+            </div>
+            <div class="cup__straw"></div>
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Paling Hemat</span>
+          <h3>Thai Tea Classic</h3>
+          <p>Thai tea pekat versi kami — lebih tebal, kurang gula, tetap ramah kantong mahasiswa.</p>
+          <div class="card__foot"><b>Rp12.000</b><span>250 ml</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="bundle" data-reveal>
+      <div class="bundle__text">
+        <h3>Paket Bareng Temen</h3>
+        <p>Order 5 botol campur bebas, hemat Rp5.000. Order 10 botol, gratis 1 + prioritas pickup.</p>
+      </div>
+      <a href="#preorder" class="btn btn--gold" data-magnet><span>Ambil Paket</span><i class="btn__arrow">→</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CARA ORDER ═══════════ -->
+<section class="sec sec--dark" id="cara">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sechead__num" data-reveal>04</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">Empat langkah, <em>nol antre</em></h2>
+      <p class="sechead__lead" data-reveal data-delay="200">Dari buka HP sampai botol di tangan kamu.</p>
+    </div>
+
+    <ol class="steps" id="steps">
+      <li class="step" data-reveal>
+        <span class="step__n">1</span>
+        <h3>Isi Pre-Order</h3>
+        <p>Buka form pre-order (Instagram / Google Form) maksimal H-2 sebelum event.</p>
+      </li>
+      <li class="step" data-reveal data-delay="120">
+        <span class="step__n">2</span>
+        <h3>Bayar Deposit</h3>
+        <p>Deposit atau full payment via QRIS. Pesanan kamu langsung terkunci di batch.</p>
+      </li>
+      <li class="step" data-reveal data-delay="240">
+        <span class="step__n">3</span>
+        <h3>Kami Produksi</h3>
+        <p>Batch dibuat H-1 sesuai jumlah order pasti, lewat QC rasa dan kemasan.</p>
+      </li>
+      <li class="step" data-reveal data-delay="360">
+        <span class="step__n">4</span>
+        <h3>Pickup Jalur Khusus</h3>
+        <p>Tunjukkan kode order di booth pickup. Ambil, jalan lagi. Nggak pakai ngantre.</p>
+      </li>
+      <span class="steps__line"><i id="stepsFill"></i></span>
+    </ol>
+
+    <div class="flowstrip" data-reveal>
+      <div class="flowstrip__head">
+        <h3>Alur produksi lengkap</h3>
+        <span class="flowstrip__hint">geser →</span>
+      </div>
+      <div class="flowstrip__scroll" id="flowScroll">
+        <div class="flowitem"><b>01</b><span>Buka Pre-Order</span><small>Promosi IG &amp; form</small></div>
+        <div class="flowitem"><b>02</b><span>Order &amp; Bayar</span><small>Deposit / full</small></div>
+        <div class="flowitem"><b>03</b><span>Rekap Pesanan</span><small>Jumlah produksi pasti</small></div>
+        <div class="flowitem"><b>04</b><span>Belanja Bahan</span><small>Grosir per batch</small></div>
+        <div class="flowitem"><b>05</b><span>Produksi Batch</span><small>H-1, jaga fresh</small></div>
+        <div class="flowitem"><b>06</b><span>QC &amp; Kemas</span><small>Rasa, botol, label</small></div>
+        <div class="flowitem"><b>07</b><span>Distribusi Booth</span><small>Hari-H di venue</small></div>
+        <div class="flowitem"><b>08</b><span>Pickup Khusus</span><small>Terpisah dari walk-in</small></div>
+        <div class="flowitem"><b>09</b><span>Evaluasi</span><small>Margin &amp; insight</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HARGA ═══════════ -->
+<section class="sec sec--cream" id="harga">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sechead__num" data-reveal>05</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">Angka yang <em>masuk akal</em></h2>
+      <p class="sechead__lead" data-reveal data-delay="200">
+        Tanpa sewa toko, tanpa pegawai harian, bahan baku grosir per batch.
+        Itu sebabnya kami bisa jual setengah harga kompetitor premium dan tetap sehat.
+      </p>
+    </div>
+
+    <div class="price">
+      <div class="price__bars" data-reveal>
+        <div class="bar" style="--h:100%">
+          <span class="bar__val">Rp38.000</span>
+          <i class="bar__fill bar__fill--muted"></i>
+          <span class="bar__lbl">Kompetitor premium<br /><small>batas atas</small></span>
+        </div>
+        <div class="bar" style="--h:66%">
+          <span class="bar__val">Rp25.000</span>
+          <i class="bar__fill bar__fill--muted"></i>
+          <span class="bar__lbl">Kompetitor premium<br /><small>batas bawah</small></span>
+        </div>
+        <div class="bar bar--hero" style="--h:34%">
+          <span class="bar__val">Rp13.000</span>
+          <i class="bar__fill"></i>
+          <span class="bar__lbl">Spill de Tea<br /><small>harga jual</small></span>
+        </div>
+        <div class="bar" style="--h:11%">
+          <span class="bar__val">Rp4.100</span>
+          <i class="bar__fill bar__fill--dark"></i>
+          <span class="bar__lbl">HPP kami<br /><small>per botol</small></span>
+        </div>
+      </div>
+
+      <aside class="price__panel" data-reveal data-delay="150">
+        <div class="ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring__bg" cx="60" cy="60" r="52" />
+            <circle class="ring__fg" cx="60" cy="60" r="52" id="ringFg" />
+          </svg>
+          <div class="ring__mid"><b><span data-count="68" data-suffix="%"></span></b><small>margin kotor</small></div>
+        </div>
+        <ul class="hpp">
+          <li><span>Teh bubuk premium</span><b>Rp800</b></li>
+          <li><span>Susu bubuk / creamer</span><b>Rp700</b></li>
+          <li><span>Gula aren cair</span><b>Rp500</b></li>
+          <li><span>Boba / topping</span><b>Rp600</b></li>
+          <li><span>Botol + label + sealer</span><b>Rp1.500</b></li>
+          <li class="hpp__total"><span>Total HPP</span><b>Rp4.100</b></li>
+        </ul>
+        <p class="price__note">Profit kotor ±Rp8.900 per botol. Sumber: riset harga grosir bubuk minuman &amp; susu kiloan, dihitung untuk skala produksi batch.</p>
+      </aside>
+    </div>
+
+    <div class="phases">
+      <article class="phase" data-reveal>
+        <span class="phase__k">Pilot</span>
+        <h3>Binus Festival</h3>
+        <p>500 botol × Rp13.000 = <b>Rp6,5 juta</b>. Validasi demand &amp; rasa langsung ke target market.</p>
+      </article>
+      <article class="phase" data-reveal data-delay="120">
+        <span class="phase__k">Fase 2</span>
+        <h3>Multi-Event Kampus</h3>
+        <p>3–4 event per bulan lintas kampus plus partnership organizer, <b>±2.000 botol/bulan</b>.</p>
+      </article>
+      <article class="phase" data-reveal data-delay="240">
+        <span class="phase__k">Fase 3</span>
+        <h3>Pre-Order Reguler</h3>
+        <p>Pre-order mingguan + delivery area kampus, <b>±6.000 botol/bulan</b> menuju skala tahunan.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SISTEM ═══════════ -->
+<section class="sec sec--dark" id="sistem">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sechead__num" data-reveal>06</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">Bukan sekadar <em>jualan minuman</em></h2>
+      <p class="sechead__lead" data-reveal data-delay="200">
+        Setiap keputusan operasional dihitung pakai pendekatan Industrial Engineering.
+      </p>
+    </div>
+
+    <div class="sysgrid">
+      <article class="sys" data-reveal>
+        <span class="sys__n">01</span>
+        <h3>Batch Production Planning</h3>
+        <p>Kapasitas produksi dihitung dari data pre-order pasti — bukan tebak-tebakan. Idle time dan bahan terbuang ditekan mendekati nol.</p>
+      </article>
+      <article class="sys" data-reveal data-delay="120">
+        <span class="sys__n">02</span>
+        <h3>Queue &amp; Flow Simulation</h3>
+        <p>Jalur pre-order pickup dipisah dari walk-in untuk memangkas waktu tunggu rata-rata pelanggan di booth.</p>
+      </article>
+      <article class="sys" data-reveal data-delay="240">
+        <span class="sys__n">03</span>
+        <h3>Cost-Efficiency Analysis</h3>
+        <p>Pembelian bahan baku grosir dihitung dengan economies of scale supaya margin tetap tebal di tiap fase ekspansi.</p>
+      </article>
+    </div>
+
+    <blockquote class="pullquote" data-reveal>
+      <p>“Minuman kekinian nggak harus bikin dompet nangis.”</p>
+      <cite>Spill de Tea — Premium taste, student price.</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════ PRE-ORDER ═══════════ -->
+<section class="sec sec--gold" id="preorder">
+  <div class="wrap wrap--narrow">
+    <div class="sechead sechead--center">
+      <span class="sechead__num" data-reveal>07</span>
+      <h2 class="sechead__title" data-reveal data-delay="100">Amankan <em>botolmu</em></h2>
+      <p class="sechead__lead" data-reveal data-delay="200">Isi form, kunci slot batch. Tim kami konfirmasi lewat WhatsApp / Instagram.</p>
+    </div>
+
+    <form class="form" id="poForm" novalidate data-reveal data-delay="300">
+      <div class="field">
+        <input type="text" id="fNama" name="nama" required placeholder=" " autocomplete="name" />
+        <label for="fNama">Nama lengkap</label>
+      </div>
+      <div class="field">
+        <input type="tel" id="fWa" name="wa" required placeholder=" " inputmode="numeric" autocomplete="tel" />
+        <label for="fWa">Nomor WhatsApp</label>
+      </div>
+      <div class="field">
+        <select id="fEvent" name="event" required>
+          <option value="" selected disabled></option>
+          <option>Binus Festival</option>
+          <option>Expo Himpunan</option>
+          <option>Event kampus lain</option>
+          <option>Pre-order reguler mingguan</option>
+        </select>
+        <label for="fEvent">Pickup di event</label>
+      </div>
+      <div class="field">
+        <select id="fMenu" name="menu" required>
+          <option value="" selected disabled></option>
+          <option data-price="13000">Aren Milk Tea — Rp13.000</option>
+          <option data-price="15000">Jasmine Boba Latte — Rp15.000</option>
+          <option data-price="15000">Matcha Cloud — Rp15.000</option>
+          <option data-price="12000">Thai Tea Classic — Rp12.000</option>
+        </select>
+        <label for="fMenu">Pilih menu</label>
+      </div>
+      <div class="field field--qty">
+        <button type="button" class="qty" data-step="-1" aria-label="Kurangi">−</button>
+        <input type="number" id="fQty" name="qty" min="1" max="50" value="2" />
+        <button type="button" class="qty" data-step="1" aria-label="Tambah">+</button>
+        <label for="fQty" class="static">Jumlah botol</label>
+      </div>
+      <div class="field field--full">
+        <textarea id="fNote" name="note" rows="2" placeholder=" "></textarea>
+        <label for="fNote">Catatan (less sugar, no boba, dll)</label>
+      </div>
+
+      <div class="form__total">
+        <span>Estimasi total</span>
+        <b id="poTotal">Rp26.000</b>
+      </div>
+
+      <button type="submit" class="btn btn--dark btn--full" data-magnet><span>Kirim Pre-Order</span><i class="btn__arrow">→</i></button>
+      <p class="form__fine">Dengan mengirim form ini kamu setuju dihubungi tim Spill de Tea untuk konfirmasi pesanan dan pembayaran.</p>
+    </form>
+
+    <div class="receipt" id="receipt" hidden>
+      <div class="receipt__check">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M15 27l8 8 15-16"/></svg>
+      </div>
+      <h3>Pre-order tercatat!</h3>
+      <p class="receipt__sub">Simpan kode ini dan tunjukkan di booth pickup.</p>
+      <div class="receipt__code" id="rCode">SDT-0000</div>
+      <ul class="receipt__list" id="rList"></ul>
+      <button type="button" class="btn btn--ghost btn--dark-ghost" id="rAgain" data-magnet><span>Buat pesanan lain</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <svg class="nav__logo nav__logo--big" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="lg-ring" cx="60" cy="60" r="53" />
+          <path class="lg-leaf" d="M60 27c16 10 24 23 24 36a24 24 0 0 1-48 0c0-13 8-26 24-36z" />
+          <path class="lg-vein" d="M60 35v50M60 55l11-9M60 68l-11-9" />
+        </svg>
+        <p class="footer__claim">Premium taste,<br /><em>student price.</em></p>
+      </div>
+      <nav class="footer__nav">
+        <div>
+          <h4>Jelajah</h4>
+          <a href="#filosofi">Cerita</a>
+          <a href="#menu">Menu</a>
+          <a href="#cara">Cara Order</a>
+          <a href="#harga">Harga</a>
+        </div>
+        <div>
+          <h4>Kontak</h4>
+          <a href="#preorder">Pre-Order</a>
+          <a href="#preorder">Kerjasama Event</a>
+          <a href="#preorder">Reseller Kampus</a>
+        </div>
+        <div>
+          <h4>Sosial</h4>
+          <a href="#preorder">Instagram</a>
+          <a href="#preorder">TikTok</a>
+          <a href="#preorder">WhatsApp</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bot">
+      <span>© <span id="yr">2026</span> Spill de Tea · Venture Creation Project, Binus University</span>
+      <span>Teknik Industri — Service Systems Engineering</span>
+    </div>
+  </div>
+  <div class="footer__word" aria-hidden="true">SPILL DE TEA</div>
+</footer>
+
+<a href="#hero" class="totop" id="toTop" aria-label="Kembali ke atas">↑</a>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
