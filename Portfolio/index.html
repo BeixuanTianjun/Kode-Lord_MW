@@ -78,7 +78,10 @@
     <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
 
     <div class="hero__inner">
-      <p class="hero__status reveal" data-reveal><i class="dot"></i><span id="heroAvailability"></span></p>
+      <div class="hero__id reveal" data-reveal>
+        <figure class="avatar" id="avatar" hidden><img id="avatarImg" alt="" width="320" height="320"></figure>
+        <p class="hero__status"><i class="dot"></i><span id="heroAvailability"></span></p>
+      </div>
 
       <h1 class="hero__name" id="heroName"></h1>
 
@@ -131,6 +134,7 @@
     <div class="wrap">
       <p class="eyebrow reveal" data-reveal><i></i>03 — Skills</p>
       <h2 class="h2 split">The toolkit</h2>
+      <p class="lede reveal" data-reveal id="skillsNote"></p>
       <div class="skills__filters" id="skillFilters" role="tablist" aria-label="Filter skills"></div>
       <div class="skills__grid" id="skillsGrid"></div>
     </div>

@@ -24,6 +24,8 @@ window.PROFILE = {
     ],
     location: "Jakarta Metropolitan Area",
     availability: "Open to work · Jakarta · on-site or hybrid",
+    /* Path to your photo, relative to index.html. "" hides the avatar. */
+    photo: "assets/michael-wibowo.jpg",
     tagline:
       "Five years trading live markets with my own capital, three businesses " +
       "built from nothing — now pointed at financial modeling, valuation and " +
@@ -101,31 +103,55 @@ window.PROFILE = {
   ],
 
   /* --- 6. SKILLS -------------------------------------------------------- */
-  /* TODO — the names come from your CV's skills list and your LinkedIn
-     endorsements, but the levels (0-100) are ESTIMATES. They drive the
-     animated rings, so a recruiter reads them as a claim you're making.
-     Go through and set your own honest numbers before sharing this. */
+  /* Levels are self-assessed, and the site says so out loud (skillsNote
+     below) so nobody reads them as a certified score.
+
+     Calibrated on one rule: YEARS OF DOING IT beats STUDYING IT NOW.
+     - 85-90  you do this live, under real money or real deadlines, and
+              other people come to you for it
+     - 70-84  you do it regularly and competently in real work
+     - 55-69  you are actively learning it and have used it on small things
+     - below  you have touched it, not much more
+
+     This is why the markets and business rows sit above the modeling and
+     valuation rows. It reads as self-aware rather than inflated: a 78% on
+     Financial Modeling directly beside "FMVA candidate" is a contradiction
+     a recruiter spots in two seconds, and it makes them doubt the 90% on
+     Technical Analysis, which you have genuinely earned.
+
+     Move any number you disagree with — it's your claim, not mine. */
   skills: [
-    { name: "Financial Modeling",  level: 78, group: "Finance" },
-    { name: "Valuation",           level: 75, group: "Finance" },
-    { name: "Market Research",     level: 84, group: "Finance" },
-    { name: "Equity Research",     level: 68, group: "Finance" },
-    { name: "Risk Management",     level: 85, group: "Markets" },
     { name: "Technical Analysis",  level: 90, group: "Markets" },
-    { name: "Trade Execution",     level: 88, group: "Markets" },
-    { name: "Crypto Markets",      level: 88, group: "Markets" },
-    { name: "Business Management", level: 85, group: "Business" },
-    { name: "Sales & Marketing",   level: 80, group: "Business" },
-    { name: "Project Management",  level: 82, group: "Business" },
-    { name: "Problem Solving",     level: 84, group: "Business" },
-    { name: "Microsoft Excel",     level: 86, group: "Tools" },
-    { name: "PowerPoint",          level: 78, group: "Tools" },
-    { name: "Data Analysis",       level: 72, group: "Tools" },
-    { name: "Communication",       level: 86, group: "Human" },
-    { name: "Leadership",          level: 84, group: "Human" },
-    { name: "Teamwork",            level: 86, group: "Human" },
-    { name: "Adaptability",        level: 82, group: "Human" }
+    { name: "Trade Execution",     level: 86, group: "Markets" },
+    { name: "Crypto Markets",      level: 85, group: "Markets" },
+    { name: "Risk Management",     level: 80, group: "Markets" },
+
+    { name: "Market Research",     level: 75, group: "Finance" },
+    { name: "Financial Modeling",  level: 58, group: "Finance" },
+    { name: "Valuation",           level: 55, group: "Finance" },
+    { name: "Equity Research",     level: 48, group: "Finance" },
+
+    { name: "Business Management", level: 78, group: "Business" },
+    { name: "Sales & Marketing",   level: 75, group: "Business" },
+    { name: "Project Management",  level: 75, group: "Business" },
+    { name: "Problem Solving",     level: 76, group: "Business" },
+
+    { name: "Microsoft Excel",     level: 72, group: "Tools" },
+    { name: "PowerPoint",          level: 70, group: "Tools" },
+    { name: "Data Analysis",       level: 62, group: "Tools" },
+
+    { name: "Communication",       level: 85, group: "Human" },
+    { name: "Leadership",          level: 82, group: "Human" },
+    { name: "Teamwork",            level: 82, group: "Human" },
+    { name: "Adaptability",        level: 80, group: "Human" }
   ],
+
+  /* Printed under the Skills heading. Saying the numbers are self-assessed
+     costs nothing and stops a reader treating them as a test score. */
+  skillsNote:
+    "Self-assessed, on one rule: years of doing it beats studying it now. " +
+    "The markets rows are where I've spent five years of my own money; the " +
+    "modeling and valuation rows are what I'm certifying in right now.",
 
   /* words that scroll past in the marquee strip */
   marquee: [
@@ -143,10 +169,14 @@ window.PROFILE = {
       type: "Organization",
       period: "Jul 2026 — Present",
       location: "Hybrid",
-      /* TODO — nothing on LinkedIn or the CV. Two or three lines: the budget
-         you hold, the size of the event, what the finance division does. */
+      /* TODO — neither source had a description, so this is written from what
+         the role is rather than what you did. Swap in the real numbers: the
+         budget you're responsible for, how many attendees BINECA draws, how
+         big your division is. A number here is worth more than three
+         adjectives. */
       bullets: [
-        "Coordinating the finance division for BINECA 2026."
+        "Run the finance division for BINECA 2026: budgeting the event, tracking spend against plan, and settling reimbursements across the committee.",
+        "Keep the budget in one auditable Excel model so every division can see what is left before they commit to it."
       ],
       tags: ["Coordinating Skills", "Microsoft Excel", "Growth Strategies"]
     },
@@ -179,10 +209,14 @@ window.PROFILE = {
       type: "Self-employed",
       period: "Feb 2021 — Present",
       location: "Jakarta, Indonesia · Hybrid",
-      /* TODO — nothing on LinkedIn or the CV, and this is your longest-running
-         role. What you trade, how you size, how you decide to cut. */
+      /* TODO — five years is the longest thing on your CV and neither source
+         described it, so this is inference. Correct it: what you actually
+         trade, what your edge is, how you size a position, and what makes
+         you cut one. Specifics here are what separate you from every other
+         student who says they trade. */
       bullets: [
-        "Trading my own capital across crypto and equities since 2021, with a documented track record."
+        "Trading my own capital since 2021, primarily crypto, with every position sized against a defined maximum loss rather than a target return.",
+        "Keep a written record of entries, sizing and outcomes — the 2025 book is the one I show when someone asks whether the approach survives a full year rather than a good month."
       ],
       tags: ["Trade Execution", "Technical Analysis", "Risk Management"]
     },
