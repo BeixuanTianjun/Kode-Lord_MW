@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio</title>
+<meta name="description" content="Personal portfolio — specialties, skills, experience and selected work.">
+<meta name="theme-color" content="#05060a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preload" href="assets/fonts/manrope-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- grain + glow layers ------------------------------------------------ -->
+<div class="fx-aurora" aria-hidden="true">
+  <span class="blob blob--a"></span>
+  <span class="blob blob--b"></span>
+  <span class="blob blob--c"></span>
+</div>
+<div class="fx-grid" aria-hidden="true"></div>
+<div class="fx-noise" aria-hidden="true"></div>
+
+<!-- cursor -------------------------------------------------------------- -->
+<div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+
+<!-- preloader ----------------------------------------------------------- -->
+<div class="loader" id="loader">
+  <div class="loader__inner">
+    <div class="loader__name" id="loaderName"></div>
+    <div class="loader__bar"><i></i></div>
+    <div class="loader__pct" id="loaderPct">0</div>
+  </div>
+</div>
+
+<!-- scroll progress ----------------------------------------------------- -->
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- nav ----------------------------------------------------------------- -->
+<header class="nav" id="nav">
+  <a class="nav__logo magnetic" href="#top"><span id="navInitials"></span><i class="nav__pulse"></i></a>
+  <nav class="nav__links" id="navLinks" aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#specialties">Specialties</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+    <i class="nav__ink" id="navInk" aria-hidden="true"></i>
+  </nav>
+  <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -------------------------------------------------------------- -->
+  <section class="hero" id="hero">
+    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+    <div class="hero__inner">
+      <p class="hero__status reveal" data-reveal><i class="dot"></i><span id="heroAvailability"></span></p>
+
+      <h1 class="hero__name" id="heroName"></h1>
+
+      <p class="hero__roles">
+        <span class="hero__rolesLabel">I do</span>
+        <span class="hero__roleSwap"><span id="heroRole"></span><i class="caret"></i></span>
+      </p>
+
+      <p class="hero__tagline reveal" data-reveal id="heroTagline"></p>
+
+      <div class="hero__actions reveal" data-reveal>
+        <a class="btn btn--primary magnetic" href="#work"><span>See the work</span></a>
+        <a class="btn btn--ghost magnetic" href="#contact"><span>Get in touch</span></a>
+      </div>
+
+      <ul class="hero__stats" id="heroStats"></ul>
+    </div>
+
+    <a class="hero__scroll" href="#about" aria-label="Scroll down"><span></span></a>
+  </section>
+
+  <!-- MARQUEE ----------------------------------------------------------- -->
+  <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marqueeTrack"></div></div>
+
+  <!-- ABOUT ------------------------------------------------------------- -->
+  <section class="section" id="about">
+    <div class="wrap about">
+      <div class="about__head">
+        <p class="eyebrow reveal" data-reveal><i></i>01 — About</p>
+        <h2 class="h2 split" id="aboutHeading"></h2>
+      </div>
+      <div class="about__body">
+        <div class="about__text" id="aboutText"></div>
+        <dl class="about__facts" id="aboutFacts"></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIALTIES ------------------------------------------------------- -->
+  <section class="section" id="specialties">
+    <div class="wrap">
+      <p class="eyebrow reveal" data-reveal><i></i>02 — Specialties</p>
+      <h2 class="h2 split">What I'm good at</h2>
+      <p class="lede reveal" data-reveal>The four things I keep getting pulled back into — and the ones I'd want a job to be mostly made of.</p>
+      <div class="specs" id="specs"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS ------------------------------------------------------------ -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <p class="eyebrow reveal" data-reveal><i></i>03 — Skills</p>
+      <h2 class="h2 split">The toolkit</h2>
+      <div class="skills__filters" id="skillFilters" role="tablist" aria-label="Filter skills"></div>
+      <div class="skills__grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -------------------------------------------------------- -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <p class="eyebrow reveal" data-reveal><i></i>04 — Experience</p>
+      <h2 class="h2 split">Where I've been</h2>
+      <div class="timeline">
+        <div class="timeline__rail" aria-hidden="true"><i id="timelineFill"></i></div>
+        <ol class="timeline__list" id="timeline"></ol>
+      </div>
+
+      <div class="edu">
+        <div class="edu__col">
+          <h3 class="h3 reveal" data-reveal>Education</h3>
+          <div id="education"></div>
+        </div>
+        <div class="edu__col">
+          <h3 class="h3 reveal" data-reveal>Certifications</h3>
+          <ul class="certs" id="certs"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -------------------------------------------------------------- -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <p class="eyebrow reveal" data-reveal><i></i>05 — Selected work</p>
+      <h2 class="h2 split">Things I built</h2>
+      <div class="projects" id="projects"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT ----------------------------------------------------------- -->
+  <section class="section section--contact" id="contact">
+    <div class="wrap contact">
+      <p class="eyebrow reveal" data-reveal><i></i>06 — Contact</p>
+      <h2 class="h2 h2--xl split" id="contactHeading"></h2>
+      <p class="lede reveal" data-reveal id="contactBlurb"></p>
+
+      <form class="form reveal" data-reveal id="contactForm" novalidate>
+        <div class="field">
+          <input id="f-name" name="name" type="text" required placeholder=" " autocomplete="name">
+          <label for="f-name">Your name</label><i class="field__line"></i>
+        </div>
+        <div class="field">
+          <input id="f-email" name="email" type="email" required placeholder=" " autocomplete="email">
+          <label for="f-email">Email</label><i class="field__line"></i>
+        </div>
+        <div class="field field--full">
+          <textarea id="f-msg" name="message" rows="4" required placeholder=" "></textarea>
+          <label for="f-msg">What's on your mind?</label><i class="field__line"></i>
+        </div>
+        <button class="btn btn--primary magnetic" type="submit"><span id="contactCta">Send</span></button>
+        <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
+      </form>
+
+      <ul class="social" id="social"></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <span id="footName"></span>
+    <span class="foot__meta"><span id="footYear"></span> · Built by hand, no frameworks</span>
+    <a href="#top" class="foot__top magnetic">Back to top ↑</a>
+  </div>
+</footer>
+
+<script src="js/profile.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
