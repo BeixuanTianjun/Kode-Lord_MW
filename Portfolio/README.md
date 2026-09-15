@@ -78,8 +78,11 @@ Once it's set, re-run the workflow from the **Actions** tab (it has
 `workflow_dispatch`, so no new commit is needed) and every later push deploys
 by itself.
 
-The workflow triggers on `main` and on `claude/upbeat-bohr-kvnbxw`; drop the
-second branch once that one is merged.
+Deploys run from `main` only. The `github-pages` environment GitHub creates
+rejects every other branch by default — `Branch "..." is not allowed to deploy
+to github-pages due to environment protection rules` — so a feature branch in
+the trigger list only queues runs that fail before their first step. Merge to
+`main` to publish.
 
 Note that this repo holds other projects, and the workflow does not publish
 them. To put them online too, add their folders to the artifact and move the

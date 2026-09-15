@@ -7,16 +7,21 @@
 # The GITHUB_TOKEN handed to a workflow cannot create the Pages site itself,
 # whatever permissions the workflow requests — only a repo admin can.
 #
+# Deploys run from main. See the trigger note below.
+#
 # The artifact is the Portfolio folder alone, not the repo root, so the site
 # lands at the Pages root rather than under /Portfolio/. The other projects in
 # this repo are not published by this workflow.
 name: Deploy portfolio to GitHub Pages
 
+# main only. The github-pages environment rejects every other branch by
+# default ("not allowed to deploy to github-pages due to environment
+# protection rules"), so listing a feature branch here just queues runs that
+# fail before their first step.
 on:
   push:
     branches:
       - main
-      - claude/upbeat-bohr-kvnbxw
     paths:
       - 'Portfolio/**'
       - '.github/workflows/deploy-pages.yml'
