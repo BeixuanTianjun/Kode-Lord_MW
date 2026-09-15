@@ -85,7 +85,7 @@ window.PROFILE = {
     {
       title: "Value & Markets",
       blurb:
-        "Five years of my own money on the line: mispriced names on the IDX held until the gap closes, and crypto traded live in front of 100+ people. Two horizons, one discipline — decide what it's worth before you look at the price.",
+        "Five years of my own money on the line: mispriced names on the IDX held until the gap closes, and crypto traded live in front of 100+ people. Decide what it's worth before you look at the price — then cut on a broken thesis, not on a red day.",
       tags: ["Value Investing", "Indonesian Equities", "Risk Management", "Technical Analysis"]
     },
     {
@@ -218,12 +218,10 @@ window.PROFILE = {
       type: "Self-employed",
       period: "Feb 2021 — Present",
       location: "Jakarta, Indonesia · Hybrid",
-      /* TODO — the last gap: what makes you cut a position. Your entry logic
-         is here; the exit discipline is what an interviewer will actually
-         push on. One sentence. */
       bullets: [
         "Running my own capital across Indonesian equities and crypto since 2021.",
         "On the equity side the thesis is mispricing: find companies trading below what the business is worth, size the position against how wrong I can afford to be, and wait for the gap to close rather than for a chart to move.",
+        "Two exits, one per horizon. A value position is cut when the thesis breaks — not when the price moves against me, which is the same information I already paid for. A trade is cut when the trend breaks.",
         "Keep a written record of entries, sizing and outcomes — the 2025 book is what I show when someone asks whether the approach survives a full year rather than a good month."
       ],
       tags: ["Value Investing", "Indonesian Equities", "Risk Management", "Trade Execution"]
