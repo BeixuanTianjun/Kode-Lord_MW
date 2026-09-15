@@ -17,9 +17,9 @@ window.PROFILE = {
       "Industrial Engineering @ BINUS · Financial Modeling & Valuation · Aspiring Investment Banking Analyst",
     /* the words that type themselves out in the hero, one after another */
     roles: [
+      "Value Investing on the IDX",
       "Financial Modeling & Valuation",
       "Aspiring Investment Banking Analyst",
-      "Trader since 2021",
       "Founder ×3"
     ],
     location: "Jakarta Metropolitan Area",
@@ -27,9 +27,9 @@ window.PROFILE = {
     /* Path to your photo, relative to index.html. "" hides the avatar. */
     photo: "assets/michael-wibowo.jpg",
     tagline:
-      "Five years trading live markets with my own capital, three businesses " +
-      "built from nothing — now pointed at financial modeling, valuation and " +
-      "a seat on a banking desk."
+      "Five years of my own capital in Indonesian equities and crypto, " +
+      "hunting mispriced value — now pointed at financial modeling, " +
+      "valuation and a seat on a banking desk."
   },
 
   /* --- 2. LINKS --------------------------------------------------------- */
@@ -61,8 +61,8 @@ window.PROFILE = {
   about: {
     heading: "About",
     paragraphs: [
-      "I'm an Industrial Engineering undergraduate at BINUS University working towards a career in investment banking. I've been trading live markets with my own capital since 2021, and the habits that came out of that — size the risk before the upside, write the thesis down, be wrong quickly and cheaply — are the ones I bring to modeling and valuation work.",
-      "I've been building businesses since school. A food stand run to a 50% margin inside three months. GrowYourUMKM, a marketing agency helping the government make its small-business programmes actually work, which reached Rp 500 million in revenue. MWcrypto, a trading community past 100 active traders where I call live market commentary and risk. BullzTCG, where I price, source and sell collectible card assets end to end.",
+      "I'm an Industrial Engineering undergraduate at BINUS University working towards a career in investment banking. Since 2021 I've run my own capital in Indonesian equities and crypto, looking for stocks the market has mispriced — which means the work is already valuation: read the business, decide what it's worth, and only then look at what it costs. The habits that came out of it — size the risk before the upside, write the thesis down, be wrong quickly and cheaply — are the ones I bring to modeling work.",
+      "I've been selling things for money since school, and I still am. A food stand run to a 50% margin inside three months. GrowYourUMKM, a marketing agency helping the government make its small-business programmes actually work, which reached Rp 500 million in revenue. MWcrypto, a trading community past 100 active traders where I call live market commentary and risk. BullzTCG, where I price, source and sell collectible card assets end to end. Right now I'm funding BINECA 2026 the same way — food resale, danusan and merchandise.",
       "I'm open to analyst internships in Jakarta — investment banking, equity research, corporate finance or valuation. On-site or hybrid."
     ],
     facts: [
@@ -83,16 +83,16 @@ window.PROFILE = {
       tags: ["Excel", "DCF", "Comparables", "Three-statement"]
     },
     {
-      title: "Markets & Risk",
+      title: "Value & Markets",
       blurb:
-        "Five years executing my own trades and, since 2024, calling them live for a community of 100+ traders. Technical analysis to find the entry, position sizing to survive being wrong.",
-      tags: ["Technical Analysis", "Trade Execution", "Risk Management", "Market Research"]
+        "Five years of my own money on the line: mispriced names on the IDX held until the gap closes, and crypto traded live in front of 100+ people. Two horizons, one discipline — decide what it's worth before you look at the price.",
+      tags: ["Value Investing", "Indonesian Equities", "Risk Management", "Technical Analysis"]
     },
     {
-      title: "Building Businesses",
+      title: "Selling & Building",
       blurb:
-        "Four ventures from a standing start — a food stand at a 50% margin, a marketing agency to Rp 500M, a trading community, a collectibles business. Pricing, cost control and the customer, every time.",
-      tags: ["Business Management", "Pricing", "Cost Control", "Growth"]
+        "From a school food stand at a 50% margin to a marketing agency at Rp 500M, a 100-trader community and a collectibles business — and still running danusan and merchandise to fund BINECA 2026. Source it, price it so the margin holds, then go and sell it.",
+      tags: ["Sales & Marketing", "Pricing", "Cost Control", "Business Management"]
     },
     {
       title: "Leading & Coordinating",
@@ -113,23 +113,32 @@ window.PROFILE = {
      - 55-69  you are actively learning it and have used it on small things
      - below  you have touched it, not much more
 
-     This is why the markets and business rows sit above the modeling and
-     valuation rows. It reads as self-aware rather than inflated: a 78% on
-     Financial Modeling directly beside "FMVA candidate" is a contradiction
-     a recruiter spots in two seconds, and it makes them doubt the 90% on
-     Technical Analysis, which you have genuinely earned.
+     This is why the markets rows sit above the modeling row. It reads as
+     self-aware rather than inflated: a high score on Financial Modeling
+     directly beside "FMVA candidate" is a contradiction a recruiter spots
+     in two seconds, and it makes them doubt the 90% on Technical Analysis,
+     which you have genuinely earned.
+
+     Valuation, Equity Research and Fundamental Analysis sit in the 60s-70s
+     rather than the 50s because picking mispriced IDX names with your own
+     money IS applied valuation — years of doing it, by the rule above.
+     Financial Modeling stays lowest of the group because that row means
+     building the three-statement model and the DCF, which is the part the
+     FMVA is still teaching you.
 
      Move any number you disagree with — it's your claim, not mine. */
   skills: [
-    { name: "Technical Analysis",  level: 90, group: "Markets" },
-    { name: "Trade Execution",     level: 86, group: "Markets" },
-    { name: "Crypto Markets",      level: 85, group: "Markets" },
-    { name: "Risk Management",     level: 80, group: "Markets" },
+    { name: "Technical Analysis",    level: 90, group: "Markets" },
+    { name: "Trade Execution",       level: 86, group: "Markets" },
+    { name: "Crypto Markets",        level: 85, group: "Markets" },
+    { name: "Risk Management",       level: 80, group: "Markets" },
+    { name: "Indonesian Equities",   level: 76, group: "Markets" },
 
-    { name: "Market Research",     level: 75, group: "Finance" },
-    { name: "Financial Modeling",  level: 58, group: "Finance" },
-    { name: "Valuation",           level: 55, group: "Finance" },
-    { name: "Equity Research",     level: 48, group: "Finance" },
+    { name: "Market Research",       level: 75, group: "Finance" },
+    { name: "Fundamental Analysis",  level: 72, group: "Finance" },
+    { name: "Valuation",             level: 66, group: "Finance" },
+    { name: "Equity Research",       level: 62, group: "Finance" },
+    { name: "Financial Modeling",    level: 58, group: "Finance" },
 
     { name: "Business Management", level: 78, group: "Business" },
     { name: "Sales & Marketing",   level: 75, group: "Business" },
@@ -150,8 +159,9 @@ window.PROFILE = {
      costs nothing and stops a reader treating them as a test score. */
   skillsNote:
     "Self-assessed, on one rule: years of doing it beats studying it now. " +
-    "The markets rows are where I've spent five years of my own money; the " +
-    "modeling and valuation rows are what I'm certifying in right now.",
+    "The markets rows are five years of my own money on the line. The " +
+    "modeling row is what the FMVA is teaching me right now, and it's scored " +
+    "like it.",
 
   /* words that scroll past in the marquee strip */
   marquee: [
@@ -169,16 +179,15 @@ window.PROFILE = {
       type: "Organization",
       period: "Jul 2026 — Present",
       location: "Hybrid",
-      /* TODO — neither source had a description, so this is written from what
-         the role is rather than what you did. Swap in the real numbers: the
-         budget you're responsible for, how many attendees BINECA draws, how
-         big your division is. A number here is worth more than three
-         adjectives. */
+      /* TODO — one number would finish this: how much the division has raised
+         so far, or the target. "Raised Rp X of a Rp Y target" beats every
+         adjective on this page. */
       bullets: [
-        "Run the finance division for BINECA 2026: budgeting the event, tracking spend against plan, and settling reimbursements across the committee.",
-        "Keep the budget in one auditable Excel model so every division can see what is left before they commit to it."
+        "Raise the event's budget rather than administer it — the finance division funds BINECA 2026 by selling, not by billing.",
+        "Run food resale and danusan alongside event merchandise: sourcing stock, setting the price that actually clears a margin, and marketing each drop to campus.",
+        "Coordinate the division across pre-orders and selling days so stock, cash and hand-off stay accounted for."
       ],
-      tags: ["Coordinating Skills", "Microsoft Excel", "Growth Strategies"]
+      tags: ["Sales & Marketing", "Pricing", "Coordinating Skills", "Growth Strategies"]
     },
     {
       role: "Founder",
@@ -209,16 +218,15 @@ window.PROFILE = {
       type: "Self-employed",
       period: "Feb 2021 — Present",
       location: "Jakarta, Indonesia · Hybrid",
-      /* TODO — five years is the longest thing on your CV and neither source
-         described it, so this is inference. Correct it: what you actually
-         trade, what your edge is, how you size a position, and what makes
-         you cut one. Specifics here are what separate you from every other
-         student who says they trade. */
+      /* TODO — the last gap: what makes you cut a position. Your entry logic
+         is here; the exit discipline is what an interviewer will actually
+         push on. One sentence. */
       bullets: [
-        "Trading my own capital since 2021, primarily crypto, with every position sized against a defined maximum loss rather than a target return.",
-        "Keep a written record of entries, sizing and outcomes — the 2025 book is the one I show when someone asks whether the approach survives a full year rather than a good month."
+        "Running my own capital across Indonesian equities and crypto since 2021.",
+        "On the equity side the thesis is mispricing: find companies trading below what the business is worth, size the position against how wrong I can afford to be, and wait for the gap to close rather than for a chart to move.",
+        "Keep a written record of entries, sizing and outcomes — the 2025 book is what I show when someone asks whether the approach survives a full year rather than a good month."
       ],
-      tags: ["Trade Execution", "Technical Analysis", "Risk Management"]
+      tags: ["Value Investing", "Indonesian Equities", "Risk Management", "Trade Execution"]
     },
     {
       role: "Freshmen Partner",
