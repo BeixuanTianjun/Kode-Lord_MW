@@ -4,8 +4,9 @@ A single-page personal portfolio built around motion: a reactive particle field
 behind the hero, kinetic typography, scroll-driven reveals, animated skill
 rings, a progressing timeline and a magnetic cursor.
 
-Content is filled in from linkedin.com/in/michael-wibowo. Anything LinkedIn
-didn't supply is tagged `TODO` in `js/profile.js` — search for it.
+Content comes from linkedin.com/in/michael-wibowo and `CV MICHAEL WIBOWO.pdf`.
+Anything neither source supplied is tagged `TODO` in `js/profile.js` — search
+for it.
 
 No build step, no framework, no CDN. Open `index.html` and it runs.
 
@@ -27,14 +28,24 @@ experience      one entry per LinkedIn role, newest first
 education       schools and degrees
 certifications  name, issuer, year
 projects        selected work, with an optional link
+achievements    competitions — `place` drives the badge, see below
 contact         heading, blurb, button label
 ```
 
-Two things are derived automatically, so don't hand-maintain them:
+Three things are derived automatically, so don't hand-maintain them:
 
 - **Skill filter pills** are generated from the distinct `group` values.
-- **Section numbering** (01 — About, 02 — Specialties …) is written in the
-  markup, so it only changes if you add or remove a whole section.
+- **Achievement badges**: a `place` starting 1st / 2nd / 3rd / Winner /
+  Champion / Gold / Best gets the solid gradient pill; anything else (Finalist,
+  Top 30) gets an outline, so a win stays louder than a placing.
+- **The contact form** hides itself whenever `links.email` is empty.
+
+**Section numbering** (01 — About, 02 — Specialties …) is written in the markup,
+so it only changes if you add or remove a whole section.
+
+`links.resume` is deliberately empty: the CV PDF carries a phone number, and
+linking it publishes that number. Make a version without it before filling the
+field in.
 
 ## Run it
 

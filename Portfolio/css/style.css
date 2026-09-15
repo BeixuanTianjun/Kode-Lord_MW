@@ -384,6 +384,26 @@ main,.nav,.foot,.marquee{position:relative;z-index:2}
   .project__go{display:none}
 }
 
+/* --- awards --------------------------------------------------------------- */
+.awards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.award{
+  position:relative;display:flex;flex-direction:column;gap:12px;padding:28px 26px;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012));
+  transition:transform .5s var(--ease),border-color .4s;
+}
+.award:hover{transform:translateY(-6px);border-color:var(--line-2)}
+.award__place{
+  align-self:flex-start;padding:6px 14px;border-radius:999px;font-size:11.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;color:#05060a;background:var(--grad);
+}
+/* finalists and placings get an outline instead of the full gradient, so a
+   win still reads as the loudest thing in the grid */
+.award--minor .award__place{background:none;color:var(--c1);border:1px solid var(--c1)}
+.award h3{margin:0;font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.award__year{font:600 11.5px/1 var(--mono);letter-spacing:.16em;color:var(--ink-3)}
+.award p{margin:0;color:var(--ink-2);font-size:14.2px;line-height:1.6}
+
 /* --- contact -------------------------------------------------------------- */
 .contact{max-width:760px}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:26px 20px;margin:18px 0 44px}

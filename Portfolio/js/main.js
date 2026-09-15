@@ -194,6 +194,21 @@
     }).join('');
   }
 
+  /* achievements — a win gets the solid gradient badge, a placing an outline */
+  var awards = $('#awards-grid');
+  if (awards && P.achievements) {
+    var WINS = /^(1st|2nd|3rd|winner|champion|gold|best)\b/i;
+    awards.innerHTML = P.achievements.map(function (a) {
+      var minor = !WINS.test(String(a.place || ''));
+      return '<article class="award' + (minor ? ' award--minor' : '') + '" data-reveal>' +
+        '<span class="award__place">' + esc(a.place) + '</span>' +
+        '<h3>' + esc(a.name) + '</h3>' +
+        '<span class="award__year">' + esc(a.year) + '</span>' +
+        (a.blurb ? '<p>' + esc(a.blurb) + '</p>' : '') +
+      '</article>';
+    }).join('');
+  }
+
   /* contact */
   var contact = P.contact || {};
   var cHead = $('#contactHeading');
@@ -275,7 +290,7 @@
   }
 
   /* stagger siblings so groups cascade instead of popping together */
-  $$('.specs > *, .timeline__list > *, .projects > *, .skills__grid > *, .certs > *, .hero__stats > *')
+  $$('.specs > *, .timeline__list > *, .projects > *, .skills__grid > *, .certs > *, .hero__stats > *, .awards > *')
     .forEach(function (el, i) {
       el.style.transitionDelay = (i % 8) * 70 + 'ms';
     });
