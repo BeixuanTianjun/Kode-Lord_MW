@@ -1,8 +1,11 @@
-# Portfolio — dark / neon
+# Portfolio — Michael Wibowo
 
 A single-page personal portfolio built around motion: a reactive particle field
 behind the hero, kinetic typography, scroll-driven reveals, animated skill
 rings, a progressing timeline and a magnetic cursor.
+
+Content is filled in from linkedin.com/in/michael-wibowo. Anything LinkedIn
+didn't supply is tagged `TODO` in `js/profile.js` — search for it.
 
 No build step, no framework, no CDN. Open `index.html` and it runs.
 
@@ -91,6 +94,12 @@ so it isn't burning frames in the background.
 ## The contact form
 
 There's no backend. Submitting validates the three fields, then hands the
-message to the visitor's mail client via `mailto:` using `links.email`. If you
-want real form submissions, point the `<form>` at Formspree, Netlify Forms or
-similar and delete the submit handler at the bottom of `main.js`.
+message to the visitor's mail client via `mailto:` using `links.email`.
+
+**While `links.email` is empty the form is hidden entirely** — a form that can
+only fail is worse than no form — and the LinkedIn button carries the section
+on its own. Fill the address in and the form reappears.
+
+If you'd rather have real submissions land in an inbox, point the `<form>` at
+Formspree, Netlify Forms or similar and delete the submit handler at the bottom
+of `main.js`.

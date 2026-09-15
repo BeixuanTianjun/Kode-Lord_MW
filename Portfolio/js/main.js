@@ -443,7 +443,11 @@
 
   /* contact form — no backend, so hand it to the mail client */
   var form = $('#contactForm'), note = $('#formNote');
-  if (form) {
+  /* with no address in profile.js there is nowhere for a message to go, so
+     don't show a form that can only fail — the social links carry it. */
+  if (form && !links.email) {
+    form.hidden = true;
+  } else if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       /* read by id — form.name is the form's own name attribute, not the input */
@@ -452,7 +456,6 @@
       var msg  = $('#f-msg').value.trim();
       if (!name || !mail || !msg) { note.textContent = 'Fill in all three fields first.'; return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { note.textContent = 'That email looks off.'; return; }
-      if (!links.email) { note.textContent = 'No email set in profile.js yet.'; return; }
       var subject = encodeURIComponent('Portfolio enquiry from ' + name);
       var body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + mail + ')');
       window.location.href = 'mailto:' + links.email + '?subject=' + subject + '&body=' + body;

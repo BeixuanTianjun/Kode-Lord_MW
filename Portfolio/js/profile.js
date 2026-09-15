@@ -1,214 +1,257 @@
 /* ============================================================================
    profile.js — THE ONLY FILE YOU NEED TO EDIT.
-   Every word on the website comes from this object. Paste your LinkedIn
-   content in here and the whole site rebuilds itself.
+   Every word on the website comes from this object.
 
-   Lines tagged TODO below are placeholder text — replace them.
+   Filled in from the LinkedIn profile at linkedin.com/in/michael-wibowo.
+   Lines tagged TODO are the ones LinkedIn didn't give us — read those and
+   replace them. Everything else is your own wording, copied across verbatim.
    ========================================================================= */
 
 window.PROFILE = {
 
   /* --- 1. IDENTITY ------------------------------------------------------ */
   meta: {
-    /* TODO: your real name */
-    name: "Your Name",
-    /* short version used in the nav logo + footer */
-    initials: "YN",
-    /* TODO: your LinkedIn headline, verbatim */
-    headline: "Computer Science Student · Frontend Developer · UI Motion",
+    name: "Michael Wibowo",
+    initials: "MW",
+    headline:
+      "Industrial Engineering @ BINUS · Financial Modeling & Valuation · Aspiring Investment Banking Analyst",
     /* the words that type themselves out in the hero, one after another */
     roles: [
-      "Frontend Developer",
-      "UI / Motion Designer",
-      "Creative Technologist",
-      "Problem Solver"
+      "Financial Modeling & Valuation",
+      "Aspiring Investment Banking Analyst",
+      "Trader since 2021",
+      "Founder ×2"
     ],
-    location: "Jakarta, Indonesia",
-    availability: "Open to internships & freelance",
-    /* one or two sentences under the big name */
+    location: "Jakarta Metropolitan Area",
+    availability: "Open to work · Jakarta · on-site or hybrid",
     tagline:
-      "I build interfaces that move — fast, accessible, and a little bit alive."
+      "Five years trading live markets with my own capital, now pointed at " +
+      "financial modeling, valuation and a seat on a banking desk."
   },
 
   /* --- 2. LINKS --------------------------------------------------------- */
   links: {
-    email: "you@example.com",
-    linkedin: "https://linkedin.com/in/your-handle",
-    github: "https://github.com/BeixuanTianjun",
+    /* TODO — the contact form and the Email button stay hidden until this
+       is filled in. Put the address you actually want recruiters using. */
+    email: "",
+    linkedin: "https://www.linkedin.com/in/michael-wibowo",
+    github: "",
     instagram: "",
     resume: ""                       /* path or URL to a PDF, "" hides it */
   },
 
   /* --- 3. NUMBERS that count up in the hero ----------------------------- */
   stats: [
-    { value: 3,  suffix: "+",  label: "Years building" },
-    { value: 12, suffix: "",   label: "Projects shipped" },
-    { value: 5,  suffix: "",   label: "Organizations" },
-    { value: 4,  suffix: "",   label: "Certifications" }
+    { value: 5,   suffix: "+", label: "Years trading markets" },
+    { value: 100, suffix: "+", label: "Traders in the community" },
+    { value: 2,   suffix: "",  label: "Ventures founded" },
+    { value: 4,   suffix: "",  label: "Certifications underway" }
   ],
 
   /* --- 4. ABOUT --------------------------------------------------------- */
+  /* TODO — your LinkedIn has no About section yet (it was still prompting
+     you to write one). This is a draft built from your own experience
+     entries. Rewrite it in your voice, then paste the same text back into
+     LinkedIn so the two match. */
   about: {
     heading: "About",
-    /* TODO: paste your LinkedIn "About" section. One string per paragraph. */
     paragraphs: [
-      "Paste your LinkedIn About section here. Each string in this array becomes its own paragraph, so you can keep the same structure you already wrote.",
-      "A second paragraph works well for what you are looking for right now — the kind of team, the kind of problem, the kind of work you want more of."
+      "I'm an Industrial Engineering undergraduate at BINUS University working towards a career in investment banking. I've been trading live markets with my own capital since 2021, and the habits that came out of that — size the risk before the upside, write the thesis down, be wrong quickly and cheaply — are the ones I bring to modeling and valuation work.",
+      "Alongside the degree I run two ventures. MWcrypto is a trading community I grew past 100 active traders, where I give live market commentary, execution strategy and real-time risk guidance during sessions. BullzTCG is a collectibles business where I handle procurement, valuation and sales end to end. I'm currently working through the FMVA, CFA, WMI and WPPE.",
+      "I'm open to analyst internships in Jakarta — investment banking, equity research, corporate finance or valuation. On-site or hybrid."
     ],
-    /* small facts printed as a definition list beside the text */
     facts: [
-      { k: "Based in",  v: "Jakarta, Indonesia" },
-      { k: "Focus",     v: "Frontend · Motion · Design systems" },
-      { k: "Languages", v: "Indonesian (native) · English (professional)" },
-      { k: "Studying",  v: "Computer Science, Binus University" }
+      { k: "Based in",   v: "Jakarta Metropolitan Area" },
+      { k: "Studying",   v: "Industrial Engineering, BINUS University" },
+      { k: "Focus",      v: "Financial modeling · Valuation · Markets" },
+      { k: "Working on", v: "FMVA · CFA · WMI · WPPE" },
+      { k: "Open to",    v: "Analyst internships · on-site or hybrid" }
     ]
   },
 
   /* --- 5. SPECIALTIES — the headline cards ------------------------------ */
-  /* Keep this to 3 or 4. These are the things you want to be hired for. */
   specialties: [
     {
-      title: "Interface Engineering",
+      title: "Financial Modeling & Valuation",
       blurb:
-        "Turning static designs into responsive, accessible, production-ready interfaces — with the details that make them feel expensive.",
-      tags: ["HTML/CSS", "JavaScript", "React", "Accessibility"]
+        "Three-statement models, DCFs and comparable company analysis built from the filings up in Excel — the assumptions written down where anyone can argue with them.",
+      tags: ["Excel", "DCF", "Comparables", "Three-statement"]
     },
     {
-      title: "Motion & Interaction",
+      title: "Markets & Risk",
       blurb:
-        "Scroll-driven storytelling, micro-interactions and WebGL touches that guide attention instead of fighting for it.",
-      tags: ["GSAP", "Canvas", "three.js", "CSS Animation"]
+        "Five years executing my own trades and, since 2024, calling them live for a community of 100+ traders. Technical analysis to find the entry, position sizing to survive being wrong.",
+      tags: ["Technical Analysis", "Trade Execution", "Risk Management", "Market Research"]
     },
     {
-      title: "Visual & Brand Design",
+      title: "Commercial & Deal Sense",
       blurb:
-        "Type, colour and layout systems that hold together across a whole product rather than one pretty screen.",
-      tags: ["Figma", "Design Systems", "Branding", "Typography"]
+        "Running BullzTCG means pricing an asset, sourcing it, and selling it at a margin that holds — procurement, valuation and client relationships in one loop.",
+      tags: ["Procurement", "Pricing", "Client Relations", "Market Positioning"]
     },
     {
-      title: "Product Thinking",
+      title: "Coordinating & Mentoring",
       blurb:
-        "Scoping the smallest thing worth building, shipping it, then letting real feedback decide what comes next.",
-      tags: ["Research", "Prototyping", "Analytics", "Iteration"]
+        "Coordinating the finance division of BINECA 2026, and a semester spent mentoring first-year students through onboarding and a capstone run to completion.",
+      tags: ["Coordination", "Project Management", "Mentoring", "Communication"]
     }
   ],
 
   /* --- 6. SKILLS -------------------------------------------------------- */
-  /* level is 0-100 and drives the animated ring. Be honest, it shows. */
+  /* TODO — the skill names come from your LinkedIn endorsements and your
+     headline, but the levels (0-100) are ESTIMATES. They drive the animated
+     rings, so a recruiter reads them as a claim. Go through and set your
+     own honest numbers before this goes public. */
   skills: [
-    { name: "JavaScript",     level: 88, group: "Engineering" },
-    { name: "HTML & CSS",     level: 94, group: "Engineering" },
-    { name: "React",          level: 78, group: "Engineering" },
-    { name: "TypeScript",     level: 70, group: "Engineering" },
-    { name: "Python",         level: 72, group: "Engineering" },
-    { name: "Git & GitHub",   level: 82, group: "Engineering" },
-    { name: "GSAP / Motion",  level: 85, group: "Motion" },
-    { name: "Canvas & WebGL", level: 68, group: "Motion" },
-    { name: "three.js",       level: 64, group: "Motion" },
-    { name: "Figma",          level: 90, group: "Design" },
-    { name: "Design Systems", level: 80, group: "Design" },
-    { name: "Typography",     level: 76, group: "Design" },
-    { name: "Public Speaking",level: 80, group: "Human" },
-    { name: "Team Leadership",level: 75, group: "Human" },
-    { name: "Copywriting",    level: 70, group: "Human" }
+    { name: "Financial Modeling",  level: 78, group: "Finance" },
+    { name: "Valuation",           level: 75, group: "Finance" },
+    { name: "Market Research",     level: 84, group: "Finance" },
+    { name: "Equity Research",     level: 68, group: "Finance" },
+    { name: "Risk Management",     level: 85, group: "Markets" },
+    { name: "Technical Analysis",  level: 90, group: "Markets" },
+    { name: "Trade Execution",     level: 88, group: "Markets" },
+    { name: "Crypto Markets",      level: 88, group: "Markets" },
+    { name: "Microsoft Excel",     level: 86, group: "Tools" },
+    { name: "PowerPoint",          level: 78, group: "Tools" },
+    { name: "Data Analysis",       level: 72, group: "Tools" },
+    { name: "Communication",       level: 86, group: "Human" },
+    { name: "Coordinating Skills", level: 82, group: "Human" },
+    { name: "Growth Strategies",   level: 76, group: "Human" },
+    { name: "Project Management",  level: 78, group: "Human" }
   ],
 
   /* words that scroll past in the marquee strip */
   marquee: [
-    "Frontend", "Motion Design", "UI Engineering", "Creative Coding",
-    "Design Systems", "Accessibility", "Prototyping", "WebGL"
+    "Financial Modeling", "Valuation", "Investment Banking", "Technical Analysis",
+    "Risk Management", "Market Research", "DCF", "Trading"
   ],
 
   /* --- 7. EXPERIENCE ---------------------------------------------------- */
-  /* Newest first. Copy each LinkedIn role straight in. */
+  /* Straight from LinkedIn, newest first. LinkedIn shows "Show all" on your
+     profile, so if there are roles below Freshmen Partner, add them here. */
   experience: [
     {
-      role: "Frontend Developer",
-      org: "Company or Organization",
-      type: "Internship",            /* Full-time / Part-time / Freelance ... */
-      period: "Jan 2025 — Present",
-      location: "Jakarta · Hybrid",
+      role: "Coordinator of Finance Division, BINECA 2026",
+      org: "HIMTRI BINUS",
+      type: "Organization",
+      period: "Jul 2026 — Present",
+      location: "Hybrid",
+      /* TODO — no description on LinkedIn. Two or three lines: the budget you
+         hold, the size of the event, what the finance division actually does. */
       bullets: [
-        "What you owned — the system, the surface, the outcome.",
-        "A result with a number in it, if you have one.",
-        "Something you introduced that outlived your time there."
+        "Coordinating the finance division for BINECA 2026."
       ],
-      tags: ["React", "TypeScript", "Figma"]
+      tags: ["Coordinating Skills", "Microsoft Excel", "Growth Strategies"]
     },
     {
-      role: "Project Lead",
-      org: "Student Organization",
-      type: "Part-time",
-      period: "Aug 2024 — Dec 2024",
-      location: "Binus University",
+      role: "Founder",
+      org: "BullzTCG",
+      type: "Self-employed",
+      period: "Mar 2026 — Present",
+      location: "Jakarta, Indonesia · On-site",
       bullets: [
-        "Led a team of N through a project from brief to launch.",
-        "The hard part, and how you got around it."
+        "Oversaw procurement, valuation, and sales of Pokemon and One Piece TCG assets, driving high-margin profitability through targeted market positioning and excellent client communication."
       ],
-      tags: ["Leadership", "Planning"]
+      tags: ["Communication", "Market Research", "Procurement"]
     },
     {
-      role: "Freelance Web Designer",
+      role: "Founder",
+      org: "MWcrypto",
+      type: "Full-time",
+      period: "Nov 2024 — Present",
+      location: "Jakarta, Indonesia · Hybrid",
+      bullets: [
+        "Founded and scaled a trading community to 100+ active traders, providing live market commentary, execution strategy, and real-time risk management guidance during active trading sessions."
+      ],
+      tags: ["Technical Analysis", "Market Research", "Risk Management", "Community"]
+    },
+    {
+      role: "Trader",
       org: "Self-employed",
-      type: "Freelance",
-      period: "2023 — 2024",
-      location: "Remote",
+      type: "Self-employed",
+      period: "Feb 2021 — Present",
+      location: "Jakarta, Indonesia · Hybrid",
+      /* TODO — no description on LinkedIn, and this is your longest-running
+         role. What you trade, how you decide, how you manage risk. */
       bullets: [
-        "Designed and shipped sites for small businesses end to end.",
-        "Handled scoping, pricing and client handover yourself."
+        "Trading my own capital across crypto and equities since 2021, with a documented track record."
       ],
-      tags: ["Web Design", "Client Work"]
+      tags: ["Trade Execution", "Technical Analysis", "Risk Management"]
+    },
+    {
+      role: "Freshmen Partner",
+      org: "BINUS University",
+      type: "Part-time",
+      period: "Sep 2025 — Jan 2026",
+      location: "West Jakarta, Indonesia · On-site",
+      bullets: [
+        "Mentored first-year students through university onboarding, tracked academic compliance for mandatory assessments, and directed a capstone tree-planting initiative from execution to completion."
+      ],
+      tags: ["Mentoring", "Project Management", "Communication"]
     }
   ],
 
   /* --- 8. EDUCATION + CERTIFICATIONS ------------------------------------ */
   education: [
     {
-      school: "Binus University",
-      degree: "Bachelor of Computer Science",
-      period: "2023 — 2027",
-      detail: "Relevant coursework, GPA or a note about what you focused on."
+      school: "BINUS University",
+      degree: "Bachelor of Industrial Engineering",
+      period: "Sep 2023 — Sep 2028",
+      detail: "Project Management and Communication."
+      /* TODO — add GPA or relevant coursework if you want it on here. */
+    },
+    {
+      school: "Finplan",
+      degree: "WPPE — Finance, General",
+      period: "Sep 2026 — Present",
+      detail: "Securities broker-dealer representative certification programme."
     }
   ],
 
+  /* TODO — these are the four in your headline, all listed as candidate /
+     in progress. Once one is passed, put the year in place of "In progress". */
   certifications: [
-    { name: "Certification name", issuer: "Issuing body", year: "2025" },
-    { name: "Certification name", issuer: "Issuing body", year: "2024" }
+    { name: "FMVA — Financial Modeling & Valuation Analyst", issuer: "CFI",       year: "In progress" },
+    { name: "CFA",                                          issuer: "CFA Institute", year: "Candidate" },
+    { name: "WMI — Wakil Manajer Investasi",                 issuer: "OJK / Indonesia", year: "Candidate" },
+    { name: "WPPE — Wakil Perantara Pedagang Efek",          issuer: "Finplan / OJK",   year: "In progress" }
   ],
 
   /* --- 9. PROJECTS ------------------------------------------------------ */
+  /* Concrete things, so this section isn't just the experience list again. */
   projects: [
     {
-      title: "Spill de Tea",
+      title: "2025 Crypto Track Record",
       year: "2025",
       blurb:
-        "Brand site for a pre-order milk tea business, with an interactive 3D cup built procedurally in three.js and motion running the length of the page.",
-      tags: ["three.js", "Motion", "Branding"],
-      link: "../Spill_de_Tea/index.html"
+        "A full year of trades kept and documented — entries, sizing and outcomes — the record I point at when someone asks whether the approach actually works.",
+      tags: ["Trade Execution", "Risk Management", "Documentation"],
+      link: ""
+      /* TODO — link the record, or a write-up of it, if you're happy to show it. */
     },
     {
-      title: "Project name",
-      year: "2024",
+      title: "BullzTCG Pop-Up, Mall Taman Anggrek",
+      year: "2026",
       blurb:
-        "One or two sentences: what it is, what was hard about it, what it does for whoever uses it.",
-      tags: ["Tag", "Tag"],
+        "A physical booth run with @hiddentreasuresociety: pricing inventory on the day, handling buyers face to face, and turning a card collection into a margin.",
+      tags: ["Retail", "Pricing", "Client Relations"],
       link: ""
     },
     {
-      title: "Project name",
-      year: "2024",
+      title: "Campus Tree-Planting Capstone",
+      year: "2025",
       blurb:
-        "Another project. Screenshots are optional — a clear sentence beats a blurry mockup.",
-      tags: ["Tag", "Tag"],
+        "Directed a tree-planting initiative from execution through to completion as part of the Freshmen Partner programme at BINUS.",
+      tags: ["Project Management", "Leadership"],
       link: ""
     }
   ],
 
   /* --- 10. CONTACT ------------------------------------------------------ */
   contact: {
-    heading: "Let's build something",
+    heading: "Let's talk markets",
     blurb:
-      "Open to internships, freelance work and collaborations. The fastest way to reach me is email — I reply within a day.",
+      "Open to analyst internships and finance roles in Jakarta — investment banking, equity research, corporate finance or valuation. LinkedIn is the fastest way to reach me.",
     cta: "Send a message"
   }
 };

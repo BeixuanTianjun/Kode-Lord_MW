@@ -44,6 +44,8 @@ body{
 }
 body.is-locked{overflow:hidden}
 img{max-width:100%;display:block}
+/* class display rules beat the UA sheet, so make hidden win explicitly */
+[hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit;color:inherit}
 ::selection{background:var(--c2);color:#fff}
@@ -213,7 +215,6 @@ main,.nav,.foot,.marquee{position:relative;z-index:2}
 .hero__name.is-in .ch{opacity:1;transform:none;transition:transform .9s var(--ease),opacity .7s;transition-delay:calc(var(--i)*38ms)}
 
 .hero__roles{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:18px 0 10px;font-size:clamp(17px,2.7vw,30px);font-weight:600}
-.hero__rolesLabel{color:var(--ink-3);font-weight:400}
 .hero__roleSwap{display:inline-flex;align-items:baseline;
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .caret{width:2px;height:1em;background:var(--c1);margin-left:3px;align-self:center;animation:blink 1s steps(2) infinite;box-shadow:0 0 10px var(--glow-c1)}
@@ -334,7 +335,7 @@ main,.nav,.foot,.marquee{position:relative;z-index:2}
 .job__org{margin:5px 0 0;font-size:14.5px;color:var(--c1)}
 .job__where{margin:3px 0 16px;font-size:12.5px;color:var(--ink-3)}
 .job ul.job__bullets{margin:0 0 18px;padding:0;list-style:none;display:grid;gap:9px}
-.job__bullets li{position:relative;padding-left:20px;color:var(--ink-2);font-size:14.6px;line-height:1.6}
+.job__bullets li{position:relative;padding-left:20px;max-width:80ch;color:var(--ink-2);font-size:14.6px;line-height:1.6}
 .job__bullets li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:1px;background:var(--c2)}
 
 .edu{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);margin-top:70px;
