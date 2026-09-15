@@ -88,27 +88,12 @@ Note that this repo holds other projects, and the workflow does not publish
 them. To put them online too, add their folders to the artifact and move the
 portfolio under a subpath.
 
-### Vercel — one-time setup
-
-Vercel needs access to the repo, which has to be granted from your own account:
-
-1. vercel.com → **Add New… → Project** → import `BeixuanTianjun/Kode-Lord_MW`.
-2. **Root Directory → `Portfolio`.** This is the one setting that matters — the
-   repo root has no site in it, so leaving this at the default gives a 404.
-3. Framework Preset: **Other**. No build command, no output directory; the
-   files are already what gets served.
-4. Deploy.
-
-`vercel.json` is then picked up automatically: clean URLs, a year of immutable
-caching on the woff2 files, and `nosniff` plus a referrer policy on everything.
-
-After the first deploy, every push to `main` ships and every other branch gets
-its own preview URL.
-
 ### Anywhere else
 
-It's a folder of static files — Netlify, Cloudflare Pages, cPanel, an S3
-bucket. Upload `Portfolio/` as-is; there is nothing to build.
+It's a folder of static files, so any static host works — Netlify, Vercel,
+Cloudflare Pages, cPanel, an S3 bucket. Upload `Portfolio/` as-is; there is
+nothing to build. On a host that serves from the repo root, point it at the
+`Portfolio` subdirectory — the root of this repo has no site in it.
 
 ### Link previews
 
@@ -118,8 +103,8 @@ generated from `profile.js` — crawlers read the served HTML and never run the
 script, so anything set at runtime would be invisible to them. If you change
 your name or headline in `profile.js`, change the tags in `index.html` too.
 
-Both URLs are hardcoded to the GitHub Pages address. On a custom domain or the
-Vercel URL, update `og:url`, `og:image`, `twitter:image` and the canonical link.
+Both URLs are hardcoded to the GitHub Pages address. On a custom domain, update
+`og:url`, `og:image`, `twitter:image` and the canonical link.
 
 ## Structure
 
