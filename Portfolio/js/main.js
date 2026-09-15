@@ -29,9 +29,9 @@
 
   var meta = P.meta || {}, links = P.links || {};
 
-  document.title = (meta.name || 'Portfolio') + ' — ' + (meta.headline || 'Portfolio');
-  var desc = $('meta[name="description"]');
-  if (desc && meta.headline) desc.setAttribute('content', meta.name + ' — ' + meta.headline);
+  /* The title, description and og: tags stay in index.html rather than being
+     written from here: link crawlers read the served HTML and never run this
+     script, so anything set at runtime would be invisible to them. */
 
   setText('#navInitials', meta.initials || '');
   setText('#loaderName', meta.name || '');
