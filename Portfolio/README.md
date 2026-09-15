@@ -55,7 +55,68 @@ open index.html                    # works straight off the filesystem
 npx http-server . -p 8080 -c-1     # or serve it, if you prefer
 ```
 
-Deploying is a folder upload — GitHub Pages, Netlify, Vercel, cPanel, anything.
+## Deploying
+
+### GitHub Pages — automatic
+
+`.github/workflows/deploy-pages.yml` (repo root) publishes this folder on every
+push that touches `Portfolio/**`. It uploads `Portfolio/` alone as the artifact,
+so the site serves from the Pages root rather than under `/Portfolio/`:
+
+    https://beixuantianjun.github.io/Kode-Lord_MW/
+
+**One-time setup, needed before the first run can succeed:**
+
+> Repo **Settings → Pages → Build and deployment → Source: "GitHub Actions"**
+
+The `GITHUB_TOKEN` a workflow receives is not allowed to create the Pages site,
+no matter what permissions the workflow asks for — only a repo admin can. Until
+that switch is flipped the run fails at *Configure Pages* with
+`Create Pages site failed ... Resource not accessible by integration`.
+
+Once it's set, re-run the workflow from the **Actions** tab (it has
+`workflow_dispatch`, so no new commit is needed) and every later push deploys
+by itself.
+
+The workflow triggers on `main` and on `claude/upbeat-bohr-kvnbxw`; drop the
+second branch once that one is merged.
+
+Note that this repo holds other projects, and the workflow does not publish
+them. To put them online too, add their folders to the artifact and move the
+portfolio under a subpath.
+
+### Vercel — one-time setup
+
+Vercel needs access to the repo, which has to be granted from your own account:
+
+1. vercel.com → **Add New… → Project** → import `BeixuanTianjun/Kode-Lord_MW`.
+2. **Root Directory → `Portfolio`.** This is the one setting that matters — the
+   repo root has no site in it, so leaving this at the default gives a 404.
+3. Framework Preset: **Other**. No build command, no output directory; the
+   files are already what gets served.
+4. Deploy.
+
+`vercel.json` is then picked up automatically: clean URLs, a year of immutable
+caching on the woff2 files, and `nosniff` plus a referrer policy on everything.
+
+After the first deploy, every push to `main` ships and every other branch gets
+its own preview URL.
+
+### Anywhere else
+
+It's a folder of static files — Netlify, Cloudflare Pages, cPanel, an S3
+bucket. Upload `Portfolio/` as-is; there is nothing to build.
+
+### Link previews
+
+`index.html` carries the `<title>`, description, canonical and `og:`/`twitter:`
+tags, and `assets/og.png` is the 1200×630 card. These are deliberately **not**
+generated from `profile.js` — crawlers read the served HTML and never run the
+script, so anything set at runtime would be invisible to them. If you change
+your name or headline in `profile.js`, change the tags in `index.html` too.
+
+Both URLs are hardcoded to the GitHub Pages address. On a custom domain or the
+Vercel URL, update `og:url`, `og:image`, `twitter:image` and the canonical link.
 
 ## Structure
 

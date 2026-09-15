@@ -1,5 +1,12 @@
 # Publishes Portfolio/ to GitHub Pages.
 #
+# ONE-TIME SETUP, required before the first successful run:
+#   Settings -> Pages -> Build and deployment -> Source: "GitHub Actions"
+# Until that is set, this workflow fails at the Configure Pages step with
+# "Create Pages site failed ... Resource not accessible by integration".
+# The GITHUB_TOKEN handed to a workflow cannot create the Pages site itself,
+# whatever permissions the workflow requests — only a repo admin can.
+#
 # The artifact is the Portfolio folder alone, not the repo root, so the site
 # lands at the Pages root rather than under /Portfolio/. The other projects in
 # this repo are not published by this workflow.
