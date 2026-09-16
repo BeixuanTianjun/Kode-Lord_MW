@@ -17,12 +17,13 @@ never need touching to change what the site says. Open that file, replace the
 placeholder text with your LinkedIn content, save, refresh.
 
 ```
-meta            name, headline, location, the roles that type themselves out
+meta            name, headline, location, photo, the roles that type out
 links           email, LinkedIn, GitHub, Instagram, résumé (blank = hidden)
 stats           the four numbers that count up in the hero
 about           your LinkedIn About section + the facts list beside it
 specialties     3-4 headline cards — the things you want to be hired for
 skills          name + level (0-100) + group; group names become the filter pills
+skillsNote      the line under the Skills heading (blank = the line is hidden)
 marquee         the words that scroll past under the hero
 experience      one entry per LinkedIn role, newest first
 education       schools and degrees
@@ -39,6 +40,9 @@ Three things are derived automatically, so don't hand-maintain them:
   Champion / Gold / Best gets the solid gradient pill; anything else (Finalist,
   Top 30) gets an outline, so a win stays louder than a placing.
 - **The contact form** hides itself whenever `links.email` is empty.
+- **The hero portrait** appears only once the file named by `meta.photo`
+  actually loads. A blank value, a typo or a missing file leaves no gap and no
+  broken-image icon — so an empty `meta.photo` is a valid state, not a bug.
 
 **Section numbering** (01 — About, 02 — Specialties …) is written in the markup,
 so it only changes if you add or remove a whole section.
@@ -46,6 +50,12 @@ so it only changes if you add or remove a whole section.
 `links.resume` is deliberately empty: the CV PDF carries a phone number, and
 linking it publishes that number. Make a version without it before filling the
 field in.
+
+**Skill levels are self-assessed and the page says so**, via `skillsNote`. They
+are banded on one rule — years of doing it beats studying it now — and the
+banding is written above the `skills` array so later edits stay on the same
+scale. A high score on something the headline calls you a *candidate* for reads
+as a contradiction and costs the rows you actually earned their credibility.
 
 ## Run it
 
@@ -118,8 +128,14 @@ Portfolio/
 │   ├── profile.js      # ← all of your content
 │   ├── hero.js         # the particle constellation (canvas 2D)
 │   └── main.js         # renders every section, then wires the motion
-└── assets/fonts/       # Manrope 300-800 (woff2)
+└── assets/
+    ├── og.png          # 1200×630 link-preview card
+    ├── <your photo>    # whatever meta.photo names
+    └── fonts/          # Manrope 300-800 (woff2)
 ```
+
+`brand/`, one level up, holds the LinkedIn banner and its source. It is not
+part of the site and is not deployed — see `brand/README.md`.
 
 `main.js` runs in two passes: render every section from `PROFILE`, then attach
 the observers. That order matters — the observers have nothing to watch until
