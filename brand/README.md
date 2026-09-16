@@ -26,7 +26,27 @@ Two things are deliberate about the layout:
   crops the banner's height on narrow screens. Centred text survives that crop;
   text near the top or bottom edge does not.
 
-## Regenerating it
+## `source-photo-linkedin-frame.jpg` — 800 × 800
+
+The profile photo as downloaded from LinkedIn, with the green `#OPENTOWORK`
+frame still on it. Kept because it is the only original: re-crop from this,
+never from the cropped result.
+
+`Portfolio/assets/michael-wibowo.jpg` is the version the site uses — frame
+removed, head and shoulders, 440 × 440, ~21 KB.
+
+Removing the frame was possible without losing any of him because the band
+never overlaps the subject; it sits entirely on the white studio background
+(measured: zero overlapping pixels). So every green pixel could be replaced
+with white outright. Two details matter if you redo it:
+
+- Match the band's **anti-aliased edge**, not just its solid colour. A strict
+  green test leaves a pale fringe that is not white either, which then merges
+  into the subject mask and drags a green arc along the shoulder.
+- Centre the crop on the **head**, not on the silhouette's bounding box. The
+  shoulders are asymmetric and pull the face off to one side.
+
+## Regenerating the banner
 
 `linkedin-banner.html` is the source. Edit it, then re-render at 2× and
 downsample — rendering at 1584 directly gives soft text:
