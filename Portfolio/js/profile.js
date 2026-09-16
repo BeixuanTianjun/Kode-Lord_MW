@@ -37,7 +37,7 @@ window.PROFILE = {
     email: "michaelwibo@gmail.com",
     linkedin: "https://www.linkedin.com/in/michael-wibowo",
     github: "",
-    instagram: "",
+    instagram: "https://instagram.com/michael.mw_",
     /* TODO — your CV isn't linked here on purpose: the PDF carries your phone
        number, and publishing it puts the number on the open web where it gets
        scraped. If you want a downloadable CV, make a version without the phone
