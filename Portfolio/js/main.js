@@ -36,6 +36,19 @@
   setText('#navInitials', meta.initials || '');
   setText('#loaderName', meta.name || '');
   setText('#heroAvailability', meta.availability || meta.location || '');
+
+  /* photo — the <figure> stays hidden until meta.photo names a file, so an
+     empty value leaves no broken image behind */
+  var avatar = $('#avatar');
+  if (avatar && meta.photo) {
+    var img = $('#avatarImg');
+    /* if the file is missing, drop the whole figure rather than leaving a
+       broken-image icon where a face should be */
+    img.onerror = function () { avatar.hidden = true; };
+    img.onload = function () { avatar.hidden = false; };
+    img.alt = meta.name ? 'Photo of ' + meta.name : 'Portrait';
+    img.src = meta.photo;
+  }
   setText('#heroTagline', meta.tagline || '');
   setText('#footName', '© ' + new Date().getFullYear() + ' ' + (meta.name || ''));
   setText('#footYear', meta.location || '');
@@ -98,6 +111,12 @@
   }
 
   /* skills — filter chips + animated rings */
+  var skillsNote = $('#skillsNote');
+  if (skillsNote) {
+    if (P.skillsNote) skillsNote.textContent = P.skillsNote;
+    else skillsNote.hidden = true;
+  }
+
   var grid = $('#skillsGrid'), filters = $('#skillFilters');
   if (grid && P.skills) {
     var R = 36, LEN = 2 * Math.PI * R;
