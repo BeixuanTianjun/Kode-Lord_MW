@@ -79,8 +79,18 @@ python3 -m http.server 8000
 Tidak ada langkah build untuk versi biasa — cukup taruh folder ini di GitHub Pages, Netlify,
 atau Vercel dan langsung jalan.
 
-Untuk GitHub Pages dari repo ini: **Settings → Pages → Source: Deploy from a branch**, pilih
-branch-nya, lalu halamannya terbit di `https://<user>.github.io/<repo>/RTA_CTA_Quiz/`.
+**GitHub Pages untuk repo ini** — di halaman repo: **Settings → Pages → Source: Deploy from a
+branch**, pilih branch `claude/funny-cori-j8nci5` (atau `main` setelah di-merge), folder `/ (root)`,
+lalu **Save**. Setelah deploy selesai (1–2 menit), alamatnya:
+
+```
+https://beixuantianjun.github.io/Kode-Lord_MW/RTA_CTA_Quiz/
+```
+
+Berkas `.nojekyll` di root repo membuat Pages menyajikan berkas apa adanya tanpa build Jekyll,
+supaya folder proyek lain di repo ini tidak bisa menggagalkan deploy.
+
+Semua path di aplikasi bersifat relatif, jadi berjalan normal meski disajikan dari subfolder.
 
 ### Publikasi sebagai Artifact
 
