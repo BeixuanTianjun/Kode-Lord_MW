@@ -46,7 +46,7 @@ milik pihak lain** dan bukan soal ujian resmi BNSP/LSP.
 | 📊 **Progress & Rapor** | Akurasi per unit, topik terlemah, riwayat sesi |
 
 Fitur lain: poin & streak, tandai soal, review lengkap di akhir sesi (filter semua/salah/ditandai),
-tema gelap–terang, pintasan keyboard (`1`–`4` untuk menjawab, `Enter` untuk lanjut,
+tema mengikuti sistem dengan tombol ganti manual, pintasan keyboard (`1`–`4` untuk menjawab, `Enter` untuk lanjut,
 `←`/`→`/`Space` di flashcard), dan progress tersimpan otomatis di browser (localStorage).
 
 ## Materi ringkas & mind map
@@ -74,7 +74,26 @@ python3 -m http.server 8000
 # lalu buka http://localhost:8000
 ```
 
-Untuk hosting: cukup taruh folder ini di GitHub Pages / Netlify / Vercel, tidak ada langkah build.
+### Hosting
+
+Tidak ada langkah build untuk versi biasa — cukup taruh folder ini di GitHub Pages, Netlify,
+atau Vercel dan langsung jalan.
+
+Untuk GitHub Pages dari repo ini: **Settings → Pages → Source: Deploy from a branch**, pilih
+branch-nya, lalu halamannya terbit di `https://<user>.github.io/<repo>/RTA_CTA_Quiz/`.
+
+### Publikasi sebagai Artifact
+
+`index.html` di sini adalah dokumen HTML utuh supaya bisa dibuka langsung lewat `file://`.
+Artifact membungkus berkasnya dengan skeleton dokumen sendiri, jadi versi untuk publikasi
+dibuat dengan melepas wrapper `<html>/<head>/<body>`:
+
+```bash
+node tools/build-artifact.js    # menghasilkan dist/index.html
+```
+
+Lalu publikasikan `dist/index.html` beserta `assets/**` dan `data/**` sebagai berkas pendukung.
+Folder `dist/` sengaja tidak di-commit karena hasil build.
 
 ## Menambah soal sendiri
 

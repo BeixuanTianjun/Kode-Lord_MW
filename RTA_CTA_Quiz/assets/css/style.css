@@ -4,23 +4,37 @@
   --line:#e3e0f5; --ink:#171235; --ink-2:#5d5780; --ink-3:#8a84ab;
   --brand:#6d3cf5; --brand-2:#a855f7; --accent:#ff9f1c; --ok:#12b76a; --bad:#f04438; --info:#2e90fa;
   --a:#7c4dff; --b:#00b8d9; --c:#ff8a3d; --d:#ff4d8d;
-  --ring:rgba(109,60,245,.35);
+  --ring:rgba(109,60,245,.35); --orb-op:.22;
   --shadow:0 10px 30px rgba(31,17,84,.10); --shadow-lg:0 24px 60px rgba(31,17,84,.16);
   --r-sm:10px; --r:16px; --r-lg:24px; --r-xl:32px;
   --font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+/* Tema mengikuti tiga state viewer: tanpa stempel (ikut sistem),
+   data-theme="dark", dan data-theme="light". Token light ada di :root di atas. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+  --bg:#0d0822; --bg-2:#140e33; --surface:#191140; --surface-2:#221750;
+  --line:#2f2168; --ink:#f3f0ff; --ink-2:#bbb2e6; --ink-3:#8a80bd;
+  --brand:#8b5cff; --brand-2:#c084fc; --accent:#ffb545; --ok:#32d583; --bad:#ff6b6b; --info:#53b1fd;
+  --a:#9b6bff; --b:#22d3ee; --c:#ffa24d; --d:#ff6fa3;
+  --ring:rgba(139,92,255,.45); --orb-op:.5;
+  --shadow:0 12px 32px rgba(0,0,0,.35); --shadow-lg:0 28px 70px rgba(0,0,0,.5);
+  }
 }
 :root[data-theme="dark"]{
   --bg:#0d0822; --bg-2:#140e33; --surface:#191140; --surface-2:#221750;
   --line:#2f2168; --ink:#f3f0ff; --ink-2:#bbb2e6; --ink-3:#8a80bd;
   --brand:#8b5cff; --brand-2:#c084fc; --accent:#ffb545; --ok:#32d583; --bad:#ff6b6b; --info:#53b1fd;
   --a:#9b6bff; --b:#22d3ee; --c:#ffa24d; --d:#ff6fa3;
-  --ring:rgba(139,92,255,.45);
+  --ring:rgba(139,92,255,.45); --orb-op:.5;
   --shadow:0 12px 32px rgba(0,0,0,.35); --shadow-lg:0 28px 70px rgba(0,0,0,.5);
 }
+
 *{box-sizing:border-box}
 [hidden]{display:none !important}
-html,body{margin:0;padding:0}
+html{margin:0}
+body{margin:0;padding:0}
 body{
   font-family:var(--font); background:var(--bg); color:var(--ink);
   -webkit-font-smoothing:antialiased; min-height:100vh; overflow-x:hidden;
@@ -34,16 +48,15 @@ kbd{font-family:var(--mono);font-size:.78em;background:var(--surface-2);border:1
 
 /* background orbs */
 .bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.bg-orbs span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 22s ease-in-out infinite}
+.bg-orbs span{position:absolute;border-radius:50%;filter:blur(90px);opacity:var(--orb-op);animation:drift 22s ease-in-out infinite}
 .bg-orbs span:nth-child(1){width:46vw;height:46vw;background:var(--brand);top:-14vw;left:-10vw}
 .bg-orbs span:nth-child(2){width:38vw;height:38vw;background:var(--d);bottom:-14vw;right:-8vw;animation-delay:-7s}
-.bg-orbs span:nth-child(3){width:30vw;height:30vw;background:var(--b);top:42%;left:52%;animation-delay:-14s;opacity:.32}
-:root[data-theme="light"] .bg-orbs span{opacity:.22}
+.bg-orbs span:nth-child(3){width:30vw;height:30vw;background:var(--b);top:42%;left:52%;animation-delay:-14s;opacity:calc(var(--orb-op) * .64)}
 @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(4vw,-3vw) scale(1.1)}66%{transform:translate(-3vw,3vw) scale(.94)}}
 
 /* ===== topbar ===== */
 .topbar{
-  position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:40;display:flex;align-items:center;justify-content:space-between;
   gap:12px;padding:14px clamp(16px,4vw,40px);
   background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line);

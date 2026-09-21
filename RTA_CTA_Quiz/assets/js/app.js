@@ -9,7 +9,7 @@ const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 const DIFF_LABEL = { mudah: 'Mudah', sedang: 'Sedang', sulit: 'Sulit' };
 
 /* ---------------- storage ---------------- */
-const defaultState = () => ({ theme: 'dark', seen: {}, history: [], imported: [], points: 0 });
+const defaultState = () => ({ theme: 'system', seen: {}, history: [], imported: [], points: 0 });
 let S = defaultState();
 
 function load() {
@@ -753,14 +753,22 @@ function drawMindmapLines() {
 }
 
 /* ---------------- events ---------------- */
+function effectiveTheme() {
+  if (S.theme === 'dark' || S.theme === 'light') return S.theme;
+  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 function applyTheme() {
-  document.documentElement.setAttribute('data-theme', S.theme);
-  $('#themeToggle').textContent = S.theme === 'dark' ? '🌙' : '☀️';
+  if (S.theme === 'dark' || S.theme === 'light') document.documentElement.setAttribute('data-theme', S.theme);
+  else document.documentElement.removeAttribute('data-theme');
+  const btn = $('#themeToggle');
+  const eff = effectiveTheme();
+  btn.textContent = eff === 'dark' ? '🌙' : '☀️';
+  btn.setAttribute('aria-label', eff === 'dark' ? 'Ganti ke tema terang' : 'Ganti ke tema gelap');
 }
 
 function bind() {
   $('#themeToggle').addEventListener('click', () => {
-    S.theme = S.theme === 'dark' ? 'light' : 'dark'; save(); applyTheme();
+    S.theme = effectiveTheme() === 'dark' ? 'light' : 'dark'; save(); applyTheme();
   });
   $('#brandHome').addEventListener('click', goHome);
   $$('[data-back]').forEach(b => b.addEventListener('click', goHome));
