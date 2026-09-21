@@ -637,6 +637,121 @@ function drawConfetti() {
 }
 addEventListener('resize', sizeCanvas);
 
+
+/* ---------------- materi ringkas & mind map ---------------- */
+let notesLevelFilter = 'ALL';
+let currentNote = null;
+const MM_COLORS = ['var(--a)', 'var(--b)', 'var(--c)', 'var(--d)', 'var(--ok)', 'var(--info)', 'var(--accent)'];
+
+function renderNotesIndex() {
+  const mods = TD.MODULES.filter(m => notesLevelFilter === 'ALL' || m.level === notesLevelFilter);
+  $('#notesGrid').innerHTML = mods.map(m => {
+    const note = TD.NOTES[m.id];
+    const nSec = note ? note.sections.length : 0;
+    const nPoin = note ? note.sections.reduce((a, s) => a + s.points.length, 0) : 0;
+    return `<button class="module-card" data-note="${esc(m.id)}" type="button" ${note ? '' : 'disabled style="opacity:.5"'}>
+      <div class="module-top">
+        <h4>${m.emoji} ${esc(m.name)}</h4>
+        <span class="muted">${esc(m.level)}</span>
+      </div>
+      <p class="muted" style="font-weight:500">${esc(note ? note.tagline : m.desc)}</p>
+      <span class="muted">${note ? nSec + ' topik · ' + nPoin + ' poin kunci · ' + note.jebakan.length + ' jebakan' : 'materi belum tersedia'}</span>
+    </button>`;
+  }).join('');
+  $$('#notesGrid .module-card[data-note]').forEach(b =>
+    b.addEventListener('click', () => openNote(b.dataset.note)));
+}
+
+function openNote(moduleId) {
+  const note = TD.NOTES[moduleId];
+  if (!note) { toast('Materi untuk unit ini belum tersedia.', 'bad'); return; }
+  const m = modOf(moduleId);
+  currentNote = note;
+
+  $('#noteLevel').textContent = m.level;
+  $('#noteTitle').textContent = m.emoji + ' ' + m.name;
+  $('#noteTagline').textContent = note.tagline;
+
+  $('#paneRingkas').innerHTML = note.sections.map((sec, i) => `
+    <div class="note-sec" style="border-left-color:${MM_COLORS[i % MM_COLORS.length]}">
+      <h3>${esc(sec.h)}</h3>
+      <div class="chip-row">${sec.mm.map(k => `<span class="note-kw">${esc(k)}</span>`).join('')}</div>
+      <ul>${sec.points.map(pt => `<li>${esc(pt)}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  $('#paneJebakan').innerHTML = note.jebakan.length
+    ? note.jebakan.map(t => `<div class="trap-item"><span>⚠️</span><div>${esc(t)}</div></div>`).join('')
+    : '<div class="empty">Belum ada catatan jebakan untuk unit ini.</div>';
+
+  switchNoteTab('ringkas');
+  show('note');
+}
+
+function switchNoteTab(tab) {
+  $$('#noteTabs .lvl-btn').forEach(b => b.classList.toggle('is-active', b.dataset.tab === tab));
+  $('#paneRingkas').hidden = tab !== 'ringkas';
+  $('#paneMindmap').hidden = tab !== 'mindmap';
+  $('#paneJebakan').hidden = tab !== 'jebakan';
+  if (tab === 'mindmap') renderMindmap();
+}
+
+function renderMindmap() {
+  if (!currentNote) return;
+  const m = modOf(currentNote.module);
+  const wrap = $('#mindmap');
+  wrap.innerHTML =
+    `<svg class="mm-svg" id="mmSvg" aria-hidden="true"></svg>
+     <div class="mm-root">${m.emoji}<br>${esc(m.name)}</div>
+     <div class="mm-branches">` +
+    currentNote.sections.map((sec, i) => {
+      const c = MM_COLORS[i % MM_COLORS.length];
+      return `<div class="mm-branch is-open" style="--bc:${c}">
+        <button class="mm-node" type="button">${esc(sec.h)}</button>
+        <div class="mm-leaves">${sec.mm.map(k => `<span class="mm-leaf">${esc(k)}</span>`).join('')}</div>
+      </div>`;
+    }).join('') + '</div>';
+
+  $$('#mindmap .mm-node').forEach(btn => btn.addEventListener('click', () => {
+    btn.closest('.mm-branch').classList.toggle('is-open');
+    requestAnimationFrame(drawMindmapLines);
+  }));
+  requestAnimationFrame(drawMindmapLines);
+}
+
+function drawMindmapLines() {
+  const wrap = $('#mindmap'), svg = $('#mmSvg');
+  if (!wrap || !svg || $('#paneMindmap').hidden) return;
+  const base = wrap.getBoundingClientRect();
+  const root = $('.mm-root', wrap);
+  if (!root) return;
+  const r = root.getBoundingClientRect();
+  const rx = r.right - base.left, ry = r.top - base.top + r.height / 2;
+
+  let d = '';
+  const curve = (x1, y1, x2, y2) => {
+    const mx = x1 + (x2 - x1) / 2;
+    return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2} `;
+  };
+
+  $$('.mm-branch', wrap).forEach(br => {
+    const node = $('.mm-node', br), nb = node.getBoundingClientRect();
+    const nx = nb.left - base.left, ny = nb.top - base.top + nb.height / 2;
+    d += curve(rx, ry, nx, ny);
+    if (br.classList.contains('is-open')) {
+      const ox = nb.right - base.left;
+      $$('.mm-leaf', br).forEach(leaf => {
+        const lb = leaf.getBoundingClientRect();
+        d += curve(ox, ny, lb.left - base.left, lb.top - base.top + lb.height / 2);
+      });
+    }
+  });
+
+  svg.setAttribute('viewBox', `0 0 ${wrap.scrollWidth} ${wrap.scrollHeight}`);
+  svg.setAttribute('width', wrap.scrollWidth);
+  svg.setAttribute('height', wrap.scrollHeight);
+  svg.innerHTML = `<path d="${d}"/>`;
+}
+
 /* ---------------- events ---------------- */
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', S.theme);
@@ -654,8 +769,27 @@ function bind() {
   $$('.mode-card').forEach(c => c.addEventListener('click', () => {
     const mode = c.dataset.mode;
     if (mode === 'stats') { renderStats(); show('stats'); return; }
+    if (mode === 'notes') { renderNotesIndex(); show('notes'); return; }
     openSetup(mode);
   }));
+
+  $$('#notesLevelSwitch .lvl-btn').forEach(b => b.addEventListener('click', () => {
+    notesLevelFilter = b.dataset.level;
+    $$('#notesLevelSwitch .lvl-btn').forEach(x => x.classList.toggle('is-active', x === b));
+    renderNotesIndex();
+  }));
+  $('#noteBack').addEventListener('click', () => { renderNotesIndex(); show('notes'); });
+  $$('#noteTabs .lvl-btn').forEach(b => b.addEventListener('click', () => switchNoteTab(b.dataset.tab)));
+  $('#mmToggleAll').addEventListener('click', () => {
+    const branches = $$('#mindmap .mm-branch');
+    const anyOpen = branches.some(x => x.classList.contains('is-open'));
+    branches.forEach(x => x.classList.toggle('is-open', !anyOpen));
+    $('#mmToggleAll').textContent = anyOpen ? 'Buka semua' : 'Tutup semua';
+    requestAnimationFrame(drawMindmapLines);
+  });
+  $('#noteDrill').addEventListener('click', () => { if (currentNote) openSetup('practice', [currentNote.module]); });
+  $('#noteFlash').addEventListener('click', () => { if (currentNote) openSetup('flash', [currentNote.module]); });
+  addEventListener('resize', () => requestAnimationFrame(drawMindmapLines));
 
   $$('#levelSwitch .lvl-btn').forEach(b => b.addEventListener('click', () => {
     levelFilter = b.dataset.level;

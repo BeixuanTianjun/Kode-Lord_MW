@@ -29,9 +29,9 @@ Statis sepenuhnya — tanpa build, tanpa server, tanpa dependency. Buka `index.h
 | CTA | Analisis Multi-Aset | 25 |
 | CTA | Statistik & Kuantitatif untuk Analis | 20 |
 
-Soal ditulis sendiri berdasarkan materi standar analisis teknikal (Murphy, Wilder, Dow Theory,
-Elliott, Wyckoff, Pring, Bollinger, dll), **bukan hasil menyalin bank soal berbayar milik pihak lain**
-dan bukan soal ujian resmi BNSP/LSP.
+Soal dan materi ditulis sendiri berdasarkan literatur standar analisis teknikal (Murphy, Wilder,
+Dow Theory, Elliott, Wyckoff, Pring, Bollinger, dll), **bukan hasil menyalin bank soal berbayar
+milik pihak lain** dan bukan soal ujian resmi BNSP/LSP.
 
 ## Mode latihan
 
@@ -42,11 +42,25 @@ dan bukan soal ujian resmi BNSP/LSP.
 | ⚡ **Rapid Fire** | 20 detik per soal, poin bonus untuk kecepatan dan streak |
 | 🩹 **Drill Soal Salah** | Hanya soal yang pernah dijawab salah atau ditandai |
 | 🃏 **Flashcard** | Kartu bolak-balik soal ↔ jawaban + pembahasan, tanpa skor |
+| 📚 **Materi & Mind Map** | Ringkasan per unit, peta konsep interaktif, daftar jebakan ujian |
 | 📊 **Progress & Rapor** | Akurasi per unit, topik terlemah, riwayat sesi |
 
 Fitur lain: poin & streak, tandai soal, review lengkap di akhir sesi (filter semua/salah/ditandai),
 tema gelap–terang, pintasan keyboard (`1`–`4` untuk menjawab, `Enter` untuk lanjut,
 `←`/`→`/`Space` di flashcard), dan progress tersimpan otomatis di browser (localStorage).
+
+## Materi ringkas & mind map
+
+Selain bank soal, tiap unit kompetensi punya halaman materi dengan tiga tab:
+
+- **📖 Ringkasan** — 78 topik berisi **334 poin kunci** (definisi, rumus, angka yang sering ditanya)
+- **🧠 Mind Map** — peta konsep interaktif dengan **302 node**, cabang bisa dibuka-tutup,
+  konektor digambar otomatis sebagai kurva SVG mengikuti posisi elemen
+- **⚠️ Jebakan Ujian** — **38 catatan** kesalahan yang sering terjadi (mis. RSI di atas 70 pada
+  tren kuat bukan sinyal jual; volatilitas disetahunkan pakai √252, bukan ×252)
+
+Dari halaman materi ada tombol langsung ke **latihan soal unit itu** atau **flashcard unit itu**.
+Isi mind map diturunkan otomatis dari label `mm` tiap section, jadi materi tidak perlu ditulis dua kali.
 
 ## Menjalankan
 
@@ -98,7 +112,8 @@ node tools/validate.js
 ```
 
 Mengecek id ganda, indeks kunci jawaban, modul tak dikenal, opsi duplikat/kosong, pembahasan
-terlalu pendek, soal kembar, plus ringkasan sebaran soal per unit dan tingkat kesulitan.
+terlalu pendek, soal kembar, plus kelengkapan materi tiap unit (section, label mind map, poin,
+jebakan) dan ringkasan sebaran soal per unit maupun tingkat kesulitan.
 
 ## Struktur
 
@@ -108,7 +123,9 @@ RTA_CTA_Quiz/
 ├── assets/css/style.css    # tema, komponen, responsif
 ├── assets/js/data.js       # metadata unit kompetensi + registry bank soal
 ├── assets/js/app.js        # mesin kuis (sesi, skor, timer, review, import)
-├── data/*.js               # bank soal per unit kompetensi
+├── data/rta-*.js           # bank soal RTA per unit kompetensi
+├── data/cta-*.js           # bank soal CTA per unit kompetensi
+├── data/notes-*.js         # materi ringkas + label mind map + jebakan ujian
 └── tools/validate.js       # validator bank soal
 ```
 

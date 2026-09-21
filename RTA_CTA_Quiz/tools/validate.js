@@ -71,6 +71,31 @@ const keyPos = [0, 0, 0, 0];
 bank.forEach(q => { keyPos[q.answer]++; });
 console.log('Posisi kunci A/B/C/D:', keyPos.join(' / '));
 
+// --- materi ringkas & mind map ---
+const notes = TD.NOTES || {};
+let totalSec = 0, totalPoin = 0, totalKw = 0, totalTrap = 0;
+TD.MODULES.forEach(m => {
+  const n = notes[m.id];
+  if (!n) { errors.push('materi hilang untuk unit ' + m.id); return; }
+  if (!n.tagline) warns.push(m.id + ': materi tanpa tagline');
+  if (!n.sections.length) errors.push(m.id + ': materi tanpa section');
+  if (!n.jebakan.length) warns.push(m.id + ': materi tanpa catatan jebakan');
+  n.sections.forEach((sec, i) => {
+    if (!sec.h) errors.push(m.id + ' section ' + i + ': tanpa judul');
+    if (!sec.mm.length) errors.push(m.id + ' section "' + sec.h + '": tanpa label mind map');
+    if (!sec.points.length) errors.push(m.id + ' section "' + sec.h + '": tanpa poin');
+    totalKw += sec.mm.length; totalPoin += sec.points.length;
+  });
+  totalSec += n.sections.length;
+  totalTrap += n.jebakan.length;
+});
+console.log('\nMateri ringkas & mind map:');
+console.log('  Unit bermateri :', Object.keys(notes).length + '/' + TD.MODULES.length);
+console.log('  Topik/cabang   :', totalSec);
+console.log('  Poin kunci     :', totalPoin);
+console.log('  Node mind map  :', totalKw);
+console.log('  Catatan jebakan:', totalTrap);
+
 if (warns.length) { console.log('\nPeringatan (' + warns.length + '):'); warns.forEach(w => console.log('  ! ' + w)); }
 if (errors.length) { console.log('\nERROR (' + errors.length + '):'); errors.forEach(e => console.log('  x ' + e)); process.exit(1); }
 console.log('\nSemua soal lolos validasi.');

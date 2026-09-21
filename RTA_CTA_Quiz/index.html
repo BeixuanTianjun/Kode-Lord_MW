@@ -69,6 +69,12 @@
         <p>Baca konsep + pembahasan tanpa tekanan skor. Enak buat H-1.</p>
         <span class="mode-go">Mulai →</span>
       </button>
+      <button class="mode-card mode-g" data-mode="notes" type="button">
+        <span class="mode-emoji">📚</span>
+        <h3>Materi &amp; Mind Map</h3>
+        <p>Ringkasan per unit kompetensi, peta konsep visual, dan daftar jebakan ujian.</p>
+        <span class="mode-go">Baca →</span>
+      </button>
       <button class="mode-card mode-f" data-mode="stats" type="button">
         <span class="mode-emoji">📊</span>
         <h3>Progress &amp; Rapor</h3>
@@ -246,6 +252,52 @@
       <button class="btn btn-danger-ghost" id="resetProgress" type="button">Reset semua progress</button>
     </div>
   </section>
+
+  <!-- ============ DAFTAR MATERI ============ -->
+  <section class="view view-notes" id="view-notes">
+    <button class="back-link" data-back type="button">← Balik</button>
+    <h1>Materi ringkas &amp; mind map</h1>
+    <p class="setup-sub">Rangkuman tiap unit kompetensi: poin kunci, peta konsep, dan jebakan yang sering keluar di ujian.</p>
+    <div class="section-head">
+      <h2>Pilih unit</h2>
+      <div class="level-switch" id="notesLevelSwitch">
+        <button class="lvl-btn is-active" data-level="ALL" type="button">Semua</button>
+        <button class="lvl-btn" data-level="RTA" type="button">RTA</button>
+        <button class="lvl-btn" data-level="CTA" type="button">CTA</button>
+      </div>
+    </div>
+    <div class="module-grid" id="notesGrid"></div>
+  </section>
+
+  <!-- ============ DETAIL MATERI ============ -->
+  <section class="view view-note" id="view-note">
+    <button class="back-link" id="noteBack" type="button">← Semua materi</button>
+    <div class="note-head">
+      <span class="tag tag-level" id="noteLevel">RTA</span>
+      <h1 id="noteTitle">Judul unit</h1>
+      <p class="setup-sub" id="noteTagline"></p>
+      <div class="level-switch note-tabs" id="noteTabs">
+        <button class="lvl-btn is-active" data-tab="ringkas" type="button">📖 Ringkasan</button>
+        <button class="lvl-btn" data-tab="mindmap" type="button">🧠 Mind Map</button>
+        <button class="lvl-btn" data-tab="jebakan" type="button">⚠️ Jebakan Ujian</button>
+      </div>
+    </div>
+
+    <div class="note-pane" id="paneRingkas"></div>
+    <div class="note-pane" id="paneMindmap" hidden>
+      <div class="mm-toolbar">
+        <span class="kbd-hint">Klik cabang buat buka-tutup. Di layar kecil, geser ke samping buat lihat semua.</span>
+        <button class="btn btn-ghost btn-sm" id="mmToggleAll" type="button">Tutup semua</button>
+      </div>
+      <div class="mindmap-scroll"><div class="mindmap" id="mindmap"></div></div>
+    </div>
+    <div class="note-pane" id="paneJebakan" hidden></div>
+
+    <div class="note-actions">
+      <button class="btn btn-primary" id="noteDrill" type="button">Latih unit ini 🎯</button>
+      <button class="btn btn-ghost" id="noteFlash" type="button">Flashcard unit ini 🃏</button>
+    </div>
+  </section>
 </main>
 
 <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
@@ -275,6 +327,12 @@
 <script src="data/cta-portfolio.js"></script>
 <script src="data/cta-aset.js"></script>
 <script src="data/cta-statistik.js"></script>
+
+<!-- materi ringkas & mind map -->
+<script src="data/notes-rta-1.js"></script>
+<script src="data/notes-rta-2.js"></script>
+<script src="data/notes-cta-1.js"></script>
+<script src="data/notes-cta-2.js"></script>
 
 <script src="assets/js/app.js"></script>
 </body>

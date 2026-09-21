@@ -70,3 +70,25 @@ TD.register = function (list) {
   });
   return added;
 };
+
+TD.NOTES = {};
+
+/* Dipanggil tiap file catatan materi. Mind map diturunkan dari sections[].mm
+   supaya isinya tidak perlu ditulis dua kali. */
+TD.registerNotes = function (list) {
+  if (!Array.isArray(list)) return 0;
+  let n = 0;
+  list.forEach(function (note) {
+    if (!note || !note.module || !Array.isArray(note.sections)) return;
+    TD.NOTES[note.module] = {
+      module: note.module,
+      tagline: note.tagline || '',
+      sections: note.sections.map(function (sec) {
+        return { h: sec.h || '', mm: sec.mm || [], points: sec.points || [] };
+      }),
+      jebakan: note.jebakan || []
+    };
+    n++;
+  });
+  return n;
+};
