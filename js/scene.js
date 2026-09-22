@@ -131,29 +131,34 @@
   band.position.y = (sleeveTop + sleeveBot) / 2;
   cup.add(band);
 
-  /* ── lid ─────────────────────────────────────────────────── */
-  var lidMat = new THREE.MeshStandardMaterial({
-    color: 0x080706, roughness: 0.88, metalness: 0
-  });
-  var lidSkirt = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.205, 1.185, 0.24, 72, 1, false), lidMat
-  );
-  lidSkirt.position.y = H + 0.02;
-  cup.add(lidSkirt);
+  /* ── lid ─────────────────────────────────────────────────
+     One lathed profile: a gripping skirt that reaches down over
+     the printed edge, a shoulder, then a shallow crown. Drawn as
+     a single surface so the crown can never read wider than the
+     skirt it sits on.                                           */
+  var lidProfile = [
+    [1.172, -0.170], [1.192, -0.130], [1.203, -0.060],
+    [1.205,  0.010], [1.196,  0.062], [1.160,  0.104],
+    [1.050,  0.148], [0.860,  0.180], [0.600,  0.201],
+    [0.300,  0.212], [0.000,  0.215]
+  ];
+  var lidPts = lidProfile.map(function (p) { return new THREE.Vector2(p[0], p[1]); });
 
-  var lidTop = new THREE.Mesh(
-    new THREE.SphereGeometry(1.19, 64, 24, 0, Math.PI * 2, 0, Math.PI * 0.5), lidMat
+  var lid = new THREE.Mesh(
+    new THREE.LatheGeometry(lidPts, 96),
+    new THREE.MeshStandardMaterial({
+      color: 0x080706, roughness: 0.88, metalness: 0, side: THREE.DoubleSide
+    })
   );
-  lidTop.scale.y = 0.34;
-  lidTop.position.y = H + 0.14;
-  cup.add(lidTop);
+  lid.position.y = 3.38;
+  cup.add(lid);
 
   var lidRing = new THREE.Mesh(
-    new THREE.TorusGeometry(1.207, 0.032, 14, 84),
-    new THREE.MeshStandardMaterial({ color: 0xc8a24a, roughness: 0.3, metalness: 0.7 })
+    new THREE.TorusGeometry(1.208, 0.026, 14, 96),
+    new THREE.MeshStandardMaterial({ color: 0xc8a24a, roughness: 0.32, metalness: 0.7 })
   );
   lidRing.rotation.x = Math.PI / 2;
-  lidRing.position.y = H + 0.14;
+  lidRing.position.y = 3.39;
   cup.add(lidRing);
 
   /* ── soft contact shadow ──────────────────────────────── */
