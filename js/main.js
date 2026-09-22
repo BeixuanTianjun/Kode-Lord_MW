@@ -302,7 +302,19 @@
     }, 3500);
   })();
 
-  /* ══════════ 10. MISC ═══════════════════════════════════ */
+  /* ══════════ 10. EMBLEM ═════════════════════════════════ */
+  (function () {
+    var src = (window.SDTBrand || {}).emblemSrc;
+    if (!src) return;
+    $$('[data-emblem]').forEach(function (el) {
+      var img = new Image();
+      img.alt = '';
+      img.src = src;
+      el.appendChild(img);
+    });
+  })();
+
+  /* ══════════ 11. MISC ═══════════════════════════════════ */
   $('#yr').textContent = new Date().getFullYear();
 
   /* touch: feed pointer to the 3D scene from finger position */

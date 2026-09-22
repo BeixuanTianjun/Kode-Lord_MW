@@ -175,69 +175,38 @@
     curds.push(m);
   }
 
-  /* ── wrapped label ────────────────────────────────────── */
-  function labelTexture() {
-    var c = document.createElement('canvas');
-    c.width = 2048; c.height = 512;
-    var x = c.getContext('2d');
+  /* ── printed sleeve ───────────────────────────────────────
+     A tall wrap in the manner of a modern tea house: botanical
+     ink over cream, a gold-ruled wordmark band, and the house
+     emblem above it. The emblem is a real image, so the texture
+     is drawn once without it and repainted when it arrives.     */
+  var sleeveTop = 2.42, sleeveBot = 0.58;
+  var sleeveH = sleeveTop - sleeveBot;
+  var wrapCanvas = document.createElement('canvas');
+  SDTBrand.wrap(wrapCanvas);
 
-    x.fillStyle = '#0B3B2E';
-    x.fillRect(0, 0, c.width, c.height);
+  var wrapTex = new THREE.CanvasTexture(wrapCanvas);
+  if ('encoding' in wrapTex) wrapTex.encoding = THREE.sRGBEncoding;
+  wrapTex.anisotropy = renderer.capabilities.getMaxAnisotropy
+    ? renderer.capabilities.getMaxAnisotropy() : 1;
 
-    // subtle inner keyline
-    x.strokeStyle = 'rgba(200,162,74,.45)';
-    x.lineWidth = 3;
-    x.strokeRect(20, 34, c.width - 40, c.height - 68);
+  var emblemImg = new Image();
+  emblemImg.onload = function () {
+    SDTBrand.wrap(wrapCanvas, emblemImg);
+    wrapTex.needsUpdate = true;
+  };
+  emblemImg.src = SDTBrand.emblemSrc;
 
-    x.textAlign = 'center';
-    x.textBaseline = 'middle';
-
-    // two repeats around the cup -> the viewer always faces one whole wordmark
-    var CELLS = 2, cw = c.width / CELLS;
-    for (var k = 0; k < CELLS; k++) {
-      var cx = cw * (k + 0.5);
-
-      x.fillStyle = '#C8A24A';
-      x.font = 'italic 600 132px Georgia, "Times New Roman", serif';
-      x.fillText('Spill de Tea', cx, 212);
-
-      x.fillStyle = 'rgba(246,241,231,.66)';
-      x.font = '500 40px Helvetica, Arial, sans-serif';
-      x.fillText('P R E M I U M   T A S T E   ·   S T U D E N T   P R I C E', cx, 316);
-
-      x.fillStyle = 'rgba(200,162,74,.85)';
-      x.font = '400 34px Helvetica, Arial, sans-serif';
-      x.fillText('250 ml  ·  FRESH BATCH', cx, 386);
-
-      // leaf ornament on the seam between cells
-      var sx = cw * k;
-      x.save();
-      x.translate(sx, c.height / 2);
-      x.strokeStyle = 'rgba(200,162,74,.55)';
-      x.lineWidth = 4;
-      x.beginPath();
-      x.moveTo(0, -96); x.lineTo(0, 96);
-      x.stroke();
-      x.restore();
-    }
-
-    var t = new THREE.CanvasTexture(c);
-    if ('encoding' in t) t.encoding = THREE.sRGBEncoding;
-    t.anisotropy = renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 1;
-    return t;
-  }
-
-  var bandY = 1.30, bandH = 1.02;
   var band = new THREE.Mesh(
     new THREE.CylinderGeometry(
-      radiusAt(bandY + bandH / 2) * 1.02, radiusAt(bandY - bandH / 2) * 1.02,
-      bandH, 96, 1, true
+      radiusAt(sleeveTop) * 1.02, radiusAt(sleeveBot) * 1.02,
+      sleeveH, 96, 1, true
     ),
     new THREE.MeshStandardMaterial({
-      map: labelTexture(), roughness: 0.58, metalness: 0.06, side: THREE.FrontSide
+      map: wrapTex, roughness: 0.6, metalness: 0.04, side: THREE.FrontSide
     })
   );
-  band.position.y = bandY;
+  band.position.y = (sleeveTop + sleeveBot) / 2;
   cup.add(band);
 
   /* ── dome lid ─────────────────────────────────────────── */

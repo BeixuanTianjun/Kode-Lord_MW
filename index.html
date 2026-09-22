@@ -18,11 +18,8 @@
 <div class="loader" id="loader">
   <div class="loader__inner">
     <div class="loader__mark">
-      <svg viewBox="0 0 120 120" aria-hidden="true">
-        <circle class="lo-ring" cx="60" cy="60" r="52" />
-        <path class="lo-leaf" d="M60 26c17 10 25 24 25 38a25 25 0 0 1-50 0c0-14 8-28 25-38z" />
-        <path class="lo-vein" d="M60 34v54" />
-      </svg>
+      <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="lo-ring" cx="60" cy="60" r="56" /></svg>
+      <span class="loader__emblem" data-emblem></span>
     </div>
     <div class="loader__word"><span>S</span><span>P</span><span>I</span><span>L</span><span>L</span><span class="sp"></span><span>D</span><span>E</span><span class="sp"></span><span>T</span><span>E</span><span>A</span></div>
     <div class="loader__bar"><i id="loaderBar"></i></div>
@@ -48,11 +45,7 @@
 <!-- ═══════════ NAV ═══════════ -->
 <header class="nav" id="nav">
   <a href="#hero" class="nav__brand" data-magnet>
-    <svg class="nav__logo" viewBox="0 0 120 120" aria-hidden="true">
-      <circle class="lg-ring" cx="60" cy="60" r="53" />
-      <path class="lg-leaf" d="M60 27c16 10 24 23 24 36a24 24 0 0 1-48 0c0-13 8-26 24-36z" />
-      <path class="lg-vein" d="M60 35v50M60 55l11-9M60 68l-11-9" />
-    </svg>
+    <span class="nav__logo" data-emblem aria-hidden="true"></span>
     <span class="nav__name">Spill<em>de</em>Tea</span>
   </a>
   <nav class="nav__links" id="navLinks">
@@ -494,11 +487,7 @@
   <div class="wrap">
     <div class="footer__top">
       <div class="footer__brand">
-        <svg class="nav__logo nav__logo--big" viewBox="0 0 120 120" aria-hidden="true">
-          <circle class="lg-ring" cx="60" cy="60" r="53" />
-          <path class="lg-leaf" d="M60 27c16 10 24 23 24 36a24 24 0 0 1-48 0c0-13 8-26 24-36z" />
-          <path class="lg-vein" d="M60 35v50M60 55l11-9M60 68l-11-9" />
-        </svg>
+        <span class="nav__logo nav__logo--big" data-emblem aria-hidden="true"></span>
         <p class="footer__claim">Premium taste,<br /><em>student price.</em></p>
       </div>
       <nav class="footer__nav">
@@ -534,6 +523,7 @@
 <a href="#hero" class="totop" id="toTop" aria-label="Kembali ke atas">↑</a>
 
 <script src="vendor/three.min.js"></script>
+<script src="js/brandmark.js"></script>
 <script src="js/scene.js"></script>
 <script src="js/main.js"></script>
 </body>
