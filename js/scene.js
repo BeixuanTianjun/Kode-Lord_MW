@@ -1,8 +1,8 @@
 /* ============================================================
    SPILL DE TEA — 3D signature cup
-   Procedurally built with three.js: glass tumbler, layered
-   milk-tea liquid (custom shader), bean curd, dome lid, straw,
-   wrapped label, and drifting tea-dust particles.
+   Procedurally built with three.js: a printed paper cup — lathed
+   body, full-height wrap generated in brandmark.js, solid lid,
+   contact shadow and drifting tea-dust particles.
    ============================================================ */
 (function () {
   'use strict';
@@ -55,7 +55,7 @@
   fill.position.set(-3.4, -1.6, 4);
   scene.add(fill);
 
-  var top = new THREE.PointLight(0xffffff, 1.1, 16);
+  var top = new THREE.PointLight(0xffffff, 0.55, 16);
   top.position.set(0, 5, 1.5);
   scene.add(top);
 
@@ -89,98 +89,20 @@
   cup.position.y = -1.35;
   scene.add(cup);
 
-  /* glass shell */
-  var glassMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff, transparent: true, opacity: 0.13,
-    roughness: 0.03, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05,
-    side: THREE.DoubleSide, depthWrite: false
+  /* paper body — the sleeve prints over it, so it only shows at the base */
+  var bodyMat = new THREE.MeshStandardMaterial({
+    color: 0xf3ecdd, roughness: 0.86, metalness: 0, side: THREE.DoubleSide
   });
-  var glass = new THREE.Mesh(new THREE.LatheGeometry(lathePoints(1), 96), glassMat);
-  cup.add(glass);
-
-  /* rim highlight */
-  var rimRing = new THREE.Mesh(
-    new THREE.TorusGeometry(1.15, 0.028, 16, 96),
-    new THREE.MeshStandardMaterial({ color: 0xf6f1e7, roughness: 0.3, metalness: 0.35 })
-  );
-  rimRing.rotation.x = Math.PI / 2;
-  rimRing.position.y = H + 0.06;
-  cup.add(rimRing);
-
-  /* ── liquid (vertical gradient shader) ────────────────── */
-  var LEVEL = 3.02;
-  var liquidMat = new THREE.ShaderMaterial({
-    uniforms: {
-      uTea:   { value: new THREE.Color(0x3f2208) },
-      uMid:   { value: new THREE.Color(0xb3763f) },
-      uMilk:  { value: new THREE.Color(0xf2e0c4) },
-      uLevel: { value: LEVEL },
-      uTime:  { value: 0 }
-    },
-    vertexShader: [
-      'varying float vY; varying vec3 vN; varying vec3 vP;',
-      'void main(){ vY = position.y; vN = normalize(normalMatrix * normal);',
-      ' vec4 mv = modelViewMatrix * vec4(position,1.0); vP = mv.xyz;',
-      ' gl_Position = projectionMatrix * mv; }'
-    ].join('\n'),
-    fragmentShader: [
-      'varying float vY; varying vec3 vN; varying vec3 vP;',
-      'uniform vec3 uTea; uniform vec3 uMid; uniform vec3 uMilk;',
-      'uniform float uLevel; uniform float uTime;',
-      'void main(){',
-      ' float t = clamp(vY / uLevel, 0.0, 1.0);',
-      ' vec3 c = mix(uTea, uMid, smoothstep(0.0, 0.42, t));',
-      ' c = mix(c, uMilk, smoothstep(0.68, 1.0, t));',
-      ' float swirl = 0.045 * sin(vY * 7.0 + uTime * 1.1);',
-      ' c += swirl;',
-      ' float fres = pow(1.0 - abs(dot(normalize(vN), normalize(-vP))), 2.4);',
-      ' c += fres * 0.32;',
-      ' gl_FragColor = vec4(c, 0.88); }'
-    ].join('\n'),
-    transparent: true
-  });
-
-  var liquid = new THREE.Mesh(new THREE.LatheGeometry(lathePoints(0.955, LEVEL), 80), liquidMat);
-  cup.add(liquid);
-
-  /* liquid surface disc */
-  var surface = new THREE.Mesh(
-    new THREE.CircleGeometry(radiusAt(LEVEL) * 0.955, 72),
-    new THREE.MeshStandardMaterial({ color: 0xf3e2ca, roughness: 0.35, metalness: 0.05 })
-  );
-  surface.rotation.x = -Math.PI / 2;
-  surface.position.y = LEVEL;
-  cup.add(surface);
-
-  /* ── bean curd ────────────────────────────────────────────
-     Soft douhua chunks rather than round pearls: each one is a
-     squashed sphere at its own scale and tilt, so the cluster reads
-     as scooped curd settling at the bottom.                        */
-  var curdGeo = new THREE.SphereGeometry(0.17, 16, 12);
-  var curdMat = new THREE.MeshStandardMaterial({
-    color: 0xf4e7cf, roughness: 0.74, metalness: 0
-  });
-  var curds = [];
-  for (var b = 0; b < 16; b++) {
-    var m = new THREE.Mesh(curdGeo, curdMat);
-    var ang = Math.random() * Math.PI * 2;
-    var rad = Math.sqrt(Math.random()) * 0.47;
-    m.position.set(Math.cos(ang) * rad, 0.18 + Math.random() * 0.4, Math.sin(ang) * rad);
-    var s = 0.8 + Math.random() * 0.45;
-    m.scale.set(s, s * (0.54 + Math.random() * 0.22), s);
-    m.rotation.set(Math.random() * 0.6, Math.random() * Math.PI, Math.random() * 0.6);
-    m.userData.p = Math.random() * Math.PI * 2;
-    m.userData.y0 = m.position.y;
-    cup.add(m);
-    curds.push(m);
-  }
+  var body = new THREE.Mesh(new THREE.LatheGeometry(lathePoints(1), 96), bodyMat);
+  cup.add(body);
 
   /* ── printed sleeve ───────────────────────────────────────
-     A tall wrap in the manner of a modern tea house: botanical
-     ink over cream, a gold-ruled wordmark band, and the house
-     emblem above it. The emblem is a real image, so the texture
-     is drawn once without it and repainted when it arrives.     */
-  var sleeveTop = 2.42, sleeveBot = 0.58;
+     A full-height printed wrap in the manner of a modern tea
+     house: botanical ink over cream, a gold-ruled wordmark band,
+     and the house emblem above it. The emblem is a real image,
+     so the texture is drawn once without it and repainted when
+     it arrives.                                                 */
+  var sleeveTop = 3.28, sleeveBot = 0.06;
   var sleeveH = sleeveTop - sleeveBot;
   var wrapCanvas = document.createElement('canvas');
   SDTBrand.wrap(wrapCanvas);
@@ -199,7 +121,7 @@
 
   var band = new THREE.Mesh(
     new THREE.CylinderGeometry(
-      radiusAt(sleeveTop) * 1.02, radiusAt(sleeveBot) * 1.02,
+      radiusAt(sleeveTop) * 1.014, radiusAt(sleeveBot) * 1.014,
       sleeveH, 96, 1, true
     ),
     new THREE.MeshStandardMaterial({
@@ -209,41 +131,30 @@
   band.position.y = (sleeveTop + sleeveBot) / 2;
   cup.add(band);
 
-  /* ── dome lid ─────────────────────────────────────────── */
-  var lid = new THREE.Mesh(
-    new THREE.SphereGeometry(1.16, 64, 28, 0, Math.PI * 2, 0, Math.PI * 0.44),
-    new THREE.MeshPhysicalMaterial({
-      color: 0xffffff, transparent: true, opacity: 0.15, roughness: 0.04,
-      metalness: 0, clearcoat: 1, side: THREE.DoubleSide, depthWrite: false
-    })
+  /* ── lid ─────────────────────────────────────────────────── */
+  var lidMat = new THREE.MeshStandardMaterial({
+    color: 0x080706, roughness: 0.88, metalness: 0
+  });
+  var lidSkirt = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.205, 1.185, 0.24, 72, 1, false), lidMat
   );
-  lid.position.y = H + 0.05;
-  cup.add(lid);
+  lidSkirt.position.y = H + 0.02;
+  cup.add(lidSkirt);
+
+  var lidTop = new THREE.Mesh(
+    new THREE.SphereGeometry(1.19, 64, 24, 0, Math.PI * 2, 0, Math.PI * 0.5), lidMat
+  );
+  lidTop.scale.y = 0.34;
+  lidTop.position.y = H + 0.14;
+  cup.add(lidTop);
 
   var lidRing = new THREE.Mesh(
-    new THREE.TorusGeometry(1.17, 0.055, 16, 96),
-    new THREE.MeshStandardMaterial({ color: 0xc8a24a, roughness: 0.28, metalness: 0.75 })
+    new THREE.TorusGeometry(1.207, 0.032, 14, 84),
+    new THREE.MeshStandardMaterial({ color: 0xc8a24a, roughness: 0.3, metalness: 0.7 })
   );
   lidRing.rotation.x = Math.PI / 2;
-  lidRing.position.y = H + 0.05;
+  lidRing.position.y = H + 0.14;
   cup.add(lidRing);
-
-  /* ── straw ────────────────────────────────────────────── */
-  var straw = new THREE.Group();
-  var strawBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.088, 0.088, 3.6, 24, 1, false),
-    new THREE.MeshStandardMaterial({ color: 0xefe3cd, roughness: 0.42, metalness: 0.12 })
-  );
-  straw.add(strawBody);
-  var strawTip = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.1, 0.1, 0.42, 24),
-    new THREE.MeshStandardMaterial({ color: 0xc8a24a, roughness: 0.3, metalness: 0.6 })
-  );
-  strawTip.position.y = 1.59;
-  straw.add(strawTip);
-  straw.position.set(0.32, 2.75, 0.14);
-  straw.rotation.z = -0.2;
-  cup.add(straw);
 
   /* ── soft contact shadow ──────────────────────────────── */
   (function () {
@@ -354,18 +265,6 @@
     cup.scale.set(s, s, s);
 
     /* liquid life */
-    liquidMat.uniforms.uTime.value = t;
-    surface.rotation.z = Math.sin(t * 1.25) * 0.05;
-    surface.position.y = LEVEL + Math.sin(t * 1.8) * 0.014;
-
-    for (var i = 0; i < curds.length; i++) {
-      var m = curds[i];
-      m.position.y = m.userData.y0 + Math.sin(t * 1.3 + m.userData.p) * 0.05;
-      m.rotation.y += 0.0022;
-    }
-
-    straw.rotation.z = -0.2 + Math.sin(t * 0.9) * 0.012;
-
     if (dust) {
       dust.rotation.y = t * 0.02;
       dust.position.y = Math.sin(t * 0.28) * 0.35;

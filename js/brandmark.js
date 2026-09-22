@@ -137,28 +137,29 @@
      2048×768, two identical cells so whichever side you face
      carries a whole composition.                              */
   function wrap(canvas, emblemImg) {
-    var W = canvas.width = 2048, H = canvas.height = 640;
+    var W = canvas.width = 2048, H = canvas.height = 1152;
     var c = canvas.getContext('2d');
     var rnd = rng(20260922);
     var CELLS = 2, cw = W / CELLS;
-    var bandY = 372, bandH = 140;
+    var bandY = 648, bandH = 158;
 
     var g = c.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, CREAM);
+    g.addColorStop(0.72, CREAM);
     g.addColorStop(1, CREAM_2);
     c.fillStyle = g;
     c.fillRect(0, 0, W, H);
 
-    scatter(c, rnd, 20, 9, -26, bandY + 6, W, 0.96);            // dense above the band
-    scatter(c, rnd, 14, 2, bandY + bandH - 4, H + 30, W, 0.3);   // sparse below it
+    scatter(c, rnd, 20, 15, -26, bandY + 6, W, 0.96);              // above the band
+    scatter(c, rnd, 20, 8, bandY + bandH - 6, H + 30, W, 0.92);   // and below, same weight
 
     c.fillStyle = JADE;
     c.fillRect(0, bandY, W, bandH);
     c.strokeStyle = GOLD;
-    c.lineWidth = 3;
+    c.lineWidth = 3.4;
     c.beginPath();
-    c.moveTo(0, bandY + 8); c.lineTo(W, bandY + 8);
-    c.moveTo(0, bandY + bandH - 8); c.lineTo(W, bandY + bandH - 8);
+    c.moveTo(0, bandY + 9); c.lineTo(W, bandY + 9);
+    c.moveTo(0, bandY + bandH - 9); c.lineTo(W, bandY + bandH - 9);
     c.stroke();
 
     c.textAlign = 'center';
@@ -167,7 +168,7 @@
       var cx = cw * (k + 0.5);
 
       if (emblemImg) {
-        var es = 312, ey = 182;
+        var es = 372, ey = 360;
         var halo = c.createRadialGradient(cx, ey, es * 0.20, cx, ey, es * 0.62);
         halo.addColorStop(0, 'rgba(248,244,234,.97)');
         halo.addColorStop(0.62, 'rgba(248,244,234,.9)');
@@ -178,26 +179,23 @@
       }
 
       c.fillStyle = GOLD;
-      c.font = 'italic 600 74px Georgia, "Times New Roman", serif';
+      c.font = 'italic 600 84px Georgia, "Times New Roman", serif';
       c.fillText('Spill de Tea', cx, bandY + bandH / 2 + 2);
 
       c.save();
       c.shadowColor = 'rgba(246,241,231,.95)';
-      c.shadowBlur = 12;
+      c.shadowBlur = 14;
       c.fillStyle = 'rgba(11,59,46,.82)';
-      c.font = '600 27px Helvetica, Arial, sans-serif';
-      c.fillText('P R E M I U M   T A S T E   ·   S T U D E N T   P R I C E', cx, 556);
-      c.fillStyle = 'rgba(11,59,46,.55)';
-      c.font = '500 23px Helvetica, Arial, sans-serif';
-      c.fillText('250 ml  ·  FRESH BATCH  ·  BINUS', cx, 596);
+      c.font = '600 30px Helvetica, Arial, sans-serif';
+      c.fillText('P R E M I U M   T A S T E   ·   S T U D E N T   P R I C E', cx, 872);
       c.restore();
     }
 
     c.strokeStyle = 'rgba(200,162,74,.6)';
     c.lineWidth = 4;
     c.beginPath();
-    c.moveTo(0, 5); c.lineTo(W, 5);
-    c.moveTo(0, H - 5); c.lineTo(W, H - 5);
+    c.moveTo(0, 26); c.lineTo(W, 26);
+    c.moveTo(0, 1112); c.lineTo(W, 1112);
     c.stroke();
 
     return canvas;
