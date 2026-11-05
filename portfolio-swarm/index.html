@@ -245,7 +245,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   addEventListener('resize', resize); resize();
 
   const COLORS = ['#18A0FB', '#F24E1E', '#0ACF83', '#A259FF', '#FFC700', '#FF7262', '#1ABCFE', '#FF6EC7', '#7CFC00', '#FFA629', '#00E5FF', '#C792EA'];
-  const NAMES = ['scraper', 'screener', 'radar', 'ksei', 'broker', 'report', 'valuer', 'charts', 'data', 'design', 'events', 'notes'];
+  // Names are ShifuWok screen names (shifuwok.com/fitur.html). Replace this list to rename the agents.
+  const NAMES = ['Screener', 'Event Radar', 'Fund Tracker', 'Ownership Map', 'Retail Sentiment', 'Deal Desk', 'Sector Rotation', 'Disclosures', 'Corporate Actions', 'Chart Match', 'Weekly Research', 'Ask a Stock'];
   const N = innerWidth < 720 ? 8 : 12;
   const rnd = (a, b) => a + Math.random() * (b - a), clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const agents = Array.from({ length: N }, (_, i) => ({ i, x: W / 2 + rnd(-20, 20), y: H / 2 + rnd(-20, 20), vx: 0, vy: 0, c: COLORS[i % COLORS.length], name: NAMES[i % NAMES.length], mode: 'intro', tx: W / 2, ty: H / 2, k: 40, cc: 9, hx: W / 2, hy: H / 2, next: 0, busy: false }));
